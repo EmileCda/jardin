@@ -7,6 +7,7 @@ npm install
 
 npm i react-router react-router-dom styled-components nanostores @nanostores/react
 npm i -D @types/styled-components
+npm i react-responsive
 
 npm run dev
 ```
