@@ -2,4 +2,21 @@
 
 1. dans un fichier ./src/data/jardin.json
 1. configuration de l'application
-1. tous les textes de l'application en fr et en
+1. tous les textes de l'application en fr, es et en
+
+## responsive
+
+les tailles minimales pour les écrans sont :
+
+1. mobile: "480px", téléphone mobile
+1. tablet: "600px", tablette portrait
+1. tableteLS: "768px", tablee paysage
+1. laptop: "992px", laptop
+1. screen: "1832x", desktop
+
+
+## base de donnée mySQL
+
+les données sont déja sur une base MySql
+
+[doc ici](https://dev.to/nasreenkhalid/simple-react-js-and-mysql-integration-crud-app-backend-5aom)

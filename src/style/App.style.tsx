@@ -46,7 +46,8 @@ export const App = styled.div`
  */
 export const AppGlobalStyle = createGlobalStyle`
   :root {
-    background-color:${AppTheme.colors.dark}
+    background-color:${AppTheme.colors.dark};
+    text-decoration: none;
   }
   html, body, #root {
     margin: 0;

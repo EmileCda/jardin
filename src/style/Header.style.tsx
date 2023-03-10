@@ -39,6 +39,7 @@ export const LanguageBarContainer = styled.div`
   img {
     height: 40px;
     width: 40px;
+    cursor: pointer;
   }
 `;
 
@@ -50,37 +51,43 @@ export const MenuBuger = styled.div`
   padding: 10px;
   border-radius: 5px;
   display: none;
-  @media (max-width: ${DevideMinSize.tableteLS }) {
+  @media (max-width: ${DevideMinSize.tableteLS}) {
     display: block;
     cursor: pointer;
   }
 `;
 
-export const MenuNavContainer = styled.div<{isClicked: boolean}>`
+export const MenuNavContainer = styled.div<{ isClicked: boolean }>`
   position: absolute;
   min-width: 100vw;
   top: 100px;
-  margin-left: ${props=>props.isClicked ? "0%" : "200%"};
+  margin-left: ${(props) => (props.isClicked ? "0%" : "200%")};
   font-size: 2rem;
   line-height: 3rem;
   transition: all 0.5s ease-out;
+  opacity: 0.5;
   background-color: ${AppTheme.colors.lessLight};
   ul {
     list-style-type: none;
   }
-
-  @media (min-width: ${DevideMinSize.tableteLS }) {
+  li a {
+      text-decoration: none;
+    }
+  @media (min-width: ${DevideMinSize.tableteLS}) {
     margin-left: 0;
     font-size: 1rem;
-  line-height: 2rem;
-  ul {
-    display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    margin: 0px;
-    padding: 0px;
-  }
-  li{margin : 0px 10px
-  }
+    line-height: 2rem;
+    ul {
+      display: flex;
+      flex-direction: row;
+      list-style-type: none;
+      margin: 0px;
+      padding: 0px;
+    }
+    li {
+      margin: 0px 10px;
+    }
+
+  
   } ;
 `;

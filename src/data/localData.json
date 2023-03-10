@@ -2,6 +2,12 @@
   "AppName": "jardin",
   "language": [
     {
+      "id": "fr",
+      "name": "Français",
+      "description": "Langue Française",
+      "urlFlag": "./src/image/fr.png"
+    },
+    {
       "id": "es",
       "name": "Español",
       "description": "Lengua española",
@@ -19,67 +25,67 @@
     {
       "fr": "Accueil",
       "en": "Home",
-      "pr": "[ES] Accueil",
+      "es": "[ES] Accueil",
       "link": "./"
     },
     {
       "fr": "Besoin",
       "en": "Needs",
-      "pr": "[ES] Besoin",
+      "es": "[ES] Besoin",
       "link": "./Needs"
     },
     {
       "fr": "Graine",
       "en": "Seeds",
-      "pr": "[ES] Graine",
+      "es": "[ES] Graine",
       "link": "./Seeds"
     },
     {
       "fr": "Itinéraire",
       "en": "itinary",
-      "pr": "[ES] Itinéraire",
+      "es": "[ES] Itinéraire",
       "link": "./itinary"
     },
     {
       "fr": "Planche",
       "en": "Planting bed",
-      "pr": "[ES] Planche",
+      "es": "[ES] Planche",
       "link": "./PlantingBed"
     },
     {
       "fr": "Tâches",
       "en": "Tasks",
-      "pr": "[PR] Tâche",
+      "es": "[PR] Tâche",
       "link": "./Task"
     },
     {
       "fr": "Suivi",
       "en": "Monitoring",
-      "pr": "[ES] Suivi",
+      "es": "[ES] Suivi",
       "link": "./Monitoring"
     },
     {
       "fr": "Calendrier",
       "en": "Calendar",
-      "pr": "[ES] Calendrier",
+      "es": "[ES] Calendrier",
       "link": "./Calendar"
     },
     {
       "fr": "Contact",
       "en": "Contact",
-      "pr": "[ES] Contact",
+      "es": "[ES] Contact",
       "link": "./Contact"
     },
     {
       "fr": "A propos",
       "en": "About",
-      "pr": "[ES] A propos",
+      "es": "[ES] A propos",
       "link": "./About"
     },
     {
       "fr": "Test",
       "en": "Test",
-      "pr": "[ES] Test",
+      "es": "[ES] Test",
       "link": "./"
     }
   ]
