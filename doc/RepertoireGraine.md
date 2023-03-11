@@ -7,6 +7,27 @@
 
 les propriétés sont au niveau de la graine générique. qui seront écrasé par les graines variétale si elles existent.
 
+## format json
+
+```json
+
+idGraine : {
+nom
+listeVar : [{
+    nom :
+    temp:
+}
+{
+}
+
+
+
+]
+
+}
+
+```
+
 ## phase 1
 
 1. graine, kcak / kg

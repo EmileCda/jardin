@@ -31,3 +31,17 @@ git branch -M main
 git remote add origin https://github.com/podspods/jardin.git
 git push -u origin main
 ```
+
+installation firebase authentification
+
+```js
+npm i @firebase/auth
+```
+
+stockage des données sur une base noSql
+
+firestore
+
+```js
+npm i @firebase/firestore
+```

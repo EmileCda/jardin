@@ -1,22 +1,22 @@
-export type Lang = "fr" | "en" | "pr";
+export type TLang = "fr" | "en" | "es";
 
 export type ImageCarousel = {
   fr: string;
-  pr: string;
+  es: string;
   en: string;
   url: string;
 };
 
 export type JsonLink = {
-  en: Lang;
-  pr: Lang;
-  fr: Lang;
+  en: TLang;
+  es: TLang;
+  fr: TLang;
   link: string;
 };
 
 
 export type LangDesc = {
-  id: Lang;
+  id: TLang;
   name:string;
   desc: string;
   url: string;
@@ -26,17 +26,25 @@ export type LangDesc = {
 
 export type JsonService = {
   en: string[] ;
-  pr: string[] ;
+  es: string[] ;
   fr: string[] ;
   link: string;
 };
-
 export type ThreeLang={
   en: string ;
-  pr: string ;
+  es: string ;
   fr: string ;
 
 }
+
+export type TscreenText={
+  en: string ;
+  es: string ;
+  fr: string ;
+  key: string ;
+
+}
+
 
 
 export type TService = {

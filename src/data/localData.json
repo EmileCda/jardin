@@ -85,8 +85,138 @@
     {
       "fr": "Test",
       "en": "Test",
-      "es": "[ES] Test",
-      "link": "./"
+      "es": "Prueba",
+      "link": "./Test"
     }
-  ]
+  ],
+  "screenSeeds": [
+    {
+      "key": "screenName",
+      "fr": "Graines",
+      "en": "Seeds",
+        "es": "Semillas"
+      
+    },
+    {
+      "key": "newSeed",
+      "fr": "Nouvelle graine",
+      "en": "New seed",
+        "es": "nueva semilla"
+      
+    },
+    { 
+      "key": "exit",
+  
+    "fr": "Quitter", "en": "exit", "es": "salida" } 
+  ],
+  "screenNewSeeds": [
+    {
+      "key": "screenName",
+      "fr": "Nouvelle Graine",
+      "en": "New Seeds",
+        "es": "Nueva Semilla"
+      
+    },
+    {
+      "key": "name",
+      "fr": "Nom",
+      "en": "name",
+        "es": "nombre"
+      
+    },
+    {
+      "key": "gender",
+      "fr": "genre",
+      "en": "gender",
+        "es": "género"
+      
+    }
+    ,
+    {
+      "key": "species",
+      "fr": "espèce",
+      "en": "species",
+        "es": "especies"
+      
+    },
+    {
+      "key": "GerminationTemperature",
+      "fr": "Température de germination",
+      "en": "Germination temperature",
+        "es": "Temperatura de germinación"
+      
+    },
+    {
+      "key": "MinTemp",
+      "fr": "Temp. min.",
+      "en": "Min. Temp.",
+        "es": "Temp. mín."
+      
+    },
+    {
+      "key": "MaxTemp",
+      "fr": "Temp. max.",
+      "en": "Max. Temp.",
+        "es": "Temp. máx."
+      
+    },
+    {
+      "key": "CultivationTemperature",
+      "fr": "Température de culture",
+      "en": "Cultivation temperature",
+        "es": "Temperatura de cultivo"
+      
+    },
+    {
+      "key": "vegetable",
+      "fr": "potagère",
+      "en": "vegetable",
+        "es": "vegetal"
+      
+    },
+    {
+      "key": "aromatic",
+      "fr": "Température",
+      "en": "aromatic",
+        "es": "aromatica"
+      
+    },
+    {
+      "key": "medicinal",
+      "fr": "Température",
+      "en": "medicinal",
+        "es": "medicinal"
+      
+    },
+    {
+      "key": "flower",
+      "fr": "Température",
+      "en": "florwer",
+        "es": "flor"
+      
+    },
+    {
+      "key": "perennial",
+      "fr": "Température",
+      "en": "perennial",
+        "es": "perenne"
+      
+    },
+    {
+      "key": "save",
+      "fr": "enregister",
+      "en": "save",
+        "es": "guardar"
+      
+    }
+
+
+  ],
+  "seedType":{
+    "vegetable":1,
+    "aromatic":2,
+    "medicinal":4,
+    "flower":8,
+    "perennial" :16}
+
 }

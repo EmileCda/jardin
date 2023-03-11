@@ -7,6 +7,7 @@ import Accueil from "./Accueil";
 import Calendar from "./Calendar";
 import Header from "./Header";
 import Needs from "./Needs";
+import NewSeed from "./NewSeed";
 import Seeds from "./Seeds";
 import Test from "./Test";
 
@@ -41,6 +42,7 @@ export default function App() {
             <Route path="/" element={<Accueil />} />
             <Route path="/Needs" element={<Needs />} />
             <Route path="/Seeds" element={<Seeds />} />
+            <Route path="/NewSeed" element={<NewSeed />} />
             <Route path="/Calendar" element={<Calendar />} />
             <Route path="/About" element={<About />} />
             <Route path="/Test" element={<Test />} />

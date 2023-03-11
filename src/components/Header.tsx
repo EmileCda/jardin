@@ -13,7 +13,7 @@ import {
   MenuBuger,
   MenuNavContainer,
 } from "../style/Header.style";
-import { Lang } from "../types/App.type";
+import { JsonLink, TLang } from "../types/App.type";
 import jsonData from "./../data/localData.json";
 export const localData: any = jsonData;
 
@@ -24,7 +24,7 @@ export const localData: any = jsonData;
  */
 
 export type LangDesc = {
-  id: Lang;
+  id: TLang;
   name: string;
   description: string;
   urlFlag: string;
@@ -48,12 +48,7 @@ export function LanguageBar() {
   );
 }
 
-export type TNavBar = {
-  fr: Lang;
-  en: Lang;
-  es: Lang;
-  link: Lang;
-};
+
 
 export function MenuNav() {
   const navBar = localData.navBar;
@@ -62,7 +57,7 @@ export function MenuNav() {
   return (
     <LanguageBarContainer>
       <ul>
-        {navBar.map((item: TNavBar, index: number) => (
+        {navBar.map((item: JsonLink, index: number) => (
           <li key={index} onClick={toggleIsVisibleTossMenu}>
             <Link to={item.link}>
               {lang === "fr" ? item.fr : lang === "en" ? item.en : item.es}
