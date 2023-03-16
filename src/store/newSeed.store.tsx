@@ -1,256 +1,352 @@
-import { addDoc, collection } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { action, map } from "nanostores";
-import { firebaseAuth, firebaseDb } from "../lib/Firebase";
+import { firebaseDb } from "../lib/Firebase";
+import { firstCap } from "../lib/utils";
+
+// defined  here ./doc/definition-table-seed.md
 
 export const tempMin = -300;
-export const genericSeedCollection = "genericSeed";
-export type TnewSeedStore = {
-  inputName: string;
-  inputGender: string;
-  inputSpecies: string;
-  inputGermMin: number;
-  inputGermMax: number;
-  inputCultMin: number;
-  inputCultMax: number;
+export const seedCollection = "Seed";
+
+export type FieldString = "name" | "gender" | "species" | "idFirebase";
+export type FieldNumber =
+  | "germMin"
+  | "germMax"
+  | "cultMin"
+  | "cultMax"
+  | "seedType";
+
+export const seedInit: Tseed = {
+  name: "",
+  gender: "",
+  species: "",
+  germMin: tempMin,
+  germMax: tempMin,
+  cultMin: tempMin,
+  cultMax: tempMin,
+  seedType: 0,
+  idFirebase: "",
+  isValide: true,
+};
+
+export type Tseed = {
+  name: string;
+  gender: string;
+  species: string;
+  germMin: number;
+  germMax: number;
+  cultMin: number;
+  cultMax: number;
   seedType: number;
-  isCorrectInputName: boolean;
-  isCorrectInputGender: boolean;
-  isCorrectInputSpecies: boolean;
-  isCorrectInputGermMin: boolean;
-  isCorrectInputGermMax: boolean;
-  isCorrectInputCultMin: boolean;
-  isCorrectInputCultMax: boolean;
+  idFirebase: string;
+  isValide: boolean;
+};
+
+export type TseedCorrect = {
+  isCorrectName: boolean;
+  isCorrectGender: boolean;
+  isCorrectSpecies: boolean;
+  isCorrectGermMin: boolean;
+  isCorrectGermMax: boolean;
+  isCorrectCultMin: boolean;
+  isCorrectCultMax: boolean;
   isCorrectSeedType: boolean;
+};
+
+export type TnewSeedStore = {
+  input: Tseed;
+  inputCorrect: TseedCorrect;
   isBusy: boolean;
+  isSeedCorrect: boolean;
+  newSeed: Tseed;
+  seedList: Tseed[];
+  isLoaded:  boolean;
 };
 
 export const newSeedStore = map<TnewSeedStore>({
-  inputName: "",
-  inputGender: "",
-  inputSpecies: "",
-  inputGermMin: tempMin,
-  inputGermMax: tempMin,
-  inputCultMin: tempMin,
-  inputCultMax: tempMin,
-  seedType: tempMin,
-  isCorrectInputName: false,
-  isCorrectInputGender: false,
-  isCorrectInputSpecies: false,
-  isCorrectInputGermMin: false,
-  isCorrectInputGermMax: false,
-  isCorrectInputCultMin: false,
-  isCorrectInputCultMax: false,
-  isCorrectSeedType: true,
+  input: { ...seedInit },
+
+  inputCorrect: {
+    isCorrectName: false,
+    isCorrectGender: false,
+    isCorrectSpecies: false,
+    isCorrectGermMin: false,
+    isCorrectGermMax: false,
+    isCorrectCultMin: false,
+    isCorrectCultMax: false,
+    isCorrectSeedType: true,
+  },
   isBusy: false,
+  isSeedCorrect: false,
+  isLoaded: false,
+  newSeed: { ...seedInit },
+  seedList: [],
 });
 
-export const setInputName = action(
+/** save the seed in firebase ,
+ * retrieve the Id from dire base insert
+ * add one seed at the begining of the list and
+ */
+export const addSeed = action(newSeedStore, "addSeed", (store) => {
+  setIsBusy(true);
+  checkSeed();
+  const { isSeedCorrect } = store.get();
+  if (isSeedCorrect) {
+    addCurrentSeed();
+    const { newSeed, seedList } = store.get();
+    const newSeedList = { ...seedList, ...newSeed };
+    store.setKey("seedList", newSeedList);
+    {console.log(newSeedList)}
+  }
+
+  setIsBusy(false);
+});
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const removeSeed = action(
+  newSeedStore,
+  "removeSeed",
+  async (store, idSeed: string) => {
+    setIsBusy(true);
+    const { seedList } = store.get();
+
+    const newSeedList = seedList.filter(
+      (oneSeed: Tseed, index: number) => oneSeed.idFirebase !== idSeed
+    );
+
+    const deletedListSeed = seedList.filter(
+      (oneSeed: Tseed, index: number) => oneSeed.idFirebase === idSeed
+    );
+
+    store.setKey("seedList", newSeedList);
+
+    const deletedSeed = { ...deletedListSeed[0], isValide: false };
+
+    const mySeedCollection = collection(firebaseDb, seedCollection);
+
+    const myDoc = doc(mySeedCollection, deletedSeed.idFirebase);
+    const status = await setDoc(myDoc, deletedSeed);
+  }
+);
+
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const updateSeed = action(
+  newSeedStore,
+  "updateSeed",
+  (store, updateSeed: Tseed, idSeed: number) => {
+    setIsBusy(true);
+    const { seedList } = store.get();
+
+    const newSeedList = seedList.map((seed, index) => {
+      if (index !== idSeed) {
+        return seed;
+      } else return updateSeed;
+    });
+
+    store.setKey("seedList", newSeedList);
+    saveSeedList();
+
+    setIsBusy(false);
+  }
+);
+
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/** read from DataBase and refresh store */
+export const loadSeedList = action(
+  newSeedStore,
+  "loadSeedList",
+  async (store) => {
+    setIsBusy(true);
+    console.log("loadSeedList");
+
+    const myCollection = collection(firebaseDb, seedCollection);
+    // const myQuery = query(myCollection,seedCollection);
+    const myQuerryDocSnapshot = await getDocs(myCollection);
+
+    console.log(myQuerryDocSnapshot);
+    let newSeedList:Tseed[]=[];
+    myQuerryDocSnapshot.forEach((oneDoc) => {
+      console.log(oneDoc.id, "=>", oneDoc.data());
+      const oneSeed: any = oneDoc.data();
+      const newSeed: Tseed = {...oneSeed, idFirebase: oneDoc.id};
+      newSeedList.push(newSeed);
+    });
+    store.setKey("seedList", newSeedList);
+
+    // saveSeedList();
+    setIsBusy(false);
+  }
+);
+
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+export const setIsBusy = action(
+  newSeedStore,
+  "setIsBusy",
+  (store, value: boolean) => {
+    store.setKey("isBusy", value);
+  }
+);
+
+export const setInputString = action(
   newSeedStore,
   "setInputName",
-  (store, value: string) => {
-    store.setKey("inputName", value);
-    setIsCorrectInputName(value)
-  }
-);
-export const setInputGender = action(
-  newSeedStore,
-  "setInputGender",
-  (store, value: string) => {
-    store.setKey("inputGender", value);
-    setIsCorrectInputGender(value)
-  }
-);
-export const setInputSpecies = action(
-  newSeedStore,
-  "setInputSpecies",
-  (store, value: string) => {
-    store.setKey("inputSpecies", value);
-    setIsCorrectInputSpecies(value)
-  }
-);
-export const setInputGermMin = action(
-  newSeedStore,
-  "setInputGermMin",
-  (store, value: number) => {
-    store.setKey("inputGermMin", value);
-    setIsCorrectInputGermMin(value)
-  }
-);
-export const setInputGermMax = action(
-  newSeedStore,
-  "setInputGermMax",
-  (store, value: number) => {
-    store.setKey("inputGermMax", value);
-    setIsCorrectInputGermMax(value)
+  (store, stringFiedl: FieldString, value: string) => {
+    const { input } = store.get();
+
+    const newInput = { ...input, [stringFiedl]: value };
+    const checkField = "isCorrect" + firstCap(stringFiedl);
+
+    store.setKey("input", newInput);
+    setIsInputStringCorrect(checkField, value);
   }
 );
 
-export const setInputCultMin = action(
+export const setInputNumber = action(
   newSeedStore,
-  "setInputCultMin",
-  (store, value: number) => {
-    store.setKey("inputCultMin", value);
-    setIsCorrectInputCultMin(value)
+  "setInputName",
+  (store, stringFiedl: FieldNumber, value: number) => {
+    const { input } = store.get();
+
+    const newInput = { ...input, [stringFiedl]: value };
+    const checkField = "isCorrect" + firstCap(stringFiedl);
+    store.setKey("input", newInput);
+    setIsInputNumberCorrect(checkField, value);
   }
 );
-export const setInputCultMax = action(
+
+export const setIsInputStringCorrect = action(
   newSeedStore,
-  "setInputCultMax",
-  (store, value: number) => {
-    store.setKey("inputCultMax", value);
-    setIsCorrectInputCultMax(value)
+  "setIsInputStringCorrect",
+  (store, field: string, value: string) => {
+    const { inputCorrect } = store.get();
+    if (value !== "") {
+      const newInputCorrect = { ...inputCorrect, [field]: true };
+
+      store.setKey("inputCorrect", newInputCorrect);
+    }
+  }
+);
+
+export const setIsInputNumberCorrect = action(
+  newSeedStore,
+  "setIsInputNumberCorrect",
+  (store, field: string, value: number) => {
+    const { inputCorrect } = store.get();
+    if (value !== tempMin) {
+      const newInputCorrect = { ...inputCorrect, [field]: true };
+      store.setKey("inputCorrect", newInputCorrect);
+    }
   }
 );
 
 
-export const setIsCorrectInputName = action(
+
+
+export const setIsLoaded = action(
   newSeedStore,
-  "setIsCorrectInputName",
-  (store, value: string) => {
-    if (value !== "") {
-      store.setKey("isCorrectInputName", true);
-      console.log(value)
-    }
-    console.log(value)
-}
-);
-export const setIsCorrectInputGender = action(
-  newSeedStore,
-  "setIsCorrectInputGender",
-  (store, value: string) => {
-    if (value !== "") {
-      store.setKey("isCorrectInputGender", true);
-    }
-  }
-);
-export const setIsCorrectInputSpecies = action(
-  newSeedStore,
-  "setIsCorrectInputSpecies",
-  (store, value: string) => {
-    if (value !== "") {
-      store.setKey("isCorrectInputSpecies", true);
-    }
-  }
-);
-export const setIsCorrectInputGermMin = action(
-  newSeedStore,
-  "setIsCorrectInputGermMin",
-  (store, value: number) => {
-    if (value > tempMin) {
-      store.setKey("isCorrectInputGermMin", true);
-    }
-  }
-);
-export const setIsCorrectInputGermMax = action(
-  newSeedStore,
-  "setIsCorrectInputGermMax",
-  (store, value: number) => {
-    if (value > tempMin) {
-      store.setKey("isCorrectInputGermMax", true);
-    }
-  }
-);
-export const setIsCorrectInputCultMin = action(
-  newSeedStore,
-  "setIsCorrectInputCultMin",
-  (store, value: number) => {
-    if (value > tempMin) {
-      store.setKey("isCorrectInputCultMin", true);
-    }
-  }
-);
-export const setIsCorrectInputCultMax = action(
-  newSeedStore,
-  "setIsCorrectInputCultMax",
-  (store, value: number) => {
-    if (value > tempMin) {
-      store.setKey("isCorrectInputCultMax", true);
-    }
-  }
-);
-export const setIsCorrectSeedType = action(
-  newSeedStore,
-  "setIsCorrectSeedType",
-  (store, value: number) => {
-    if (value > 0) {
-      store.setKey("isCorrectSeedType", true);
-    }
+  "setIsBusy",
+  (store, value: boolean) => {
+    store.setKey("isLoaded", value);
   }
 );
 
 // ---------------------------------------------------------------------
-
-export const saveNewSeed = action(
+export const saveSeedList = action(
   newSeedStore,
   "saveNewSeed",
   async (store) => {
     store.setKey("isBusy", true);
-    console.log("debut")
 
-    const {
-      inputName,
-      inputGender,
-      inputSpecies,
-      inputGermMin,
-      inputGermMax,
-      inputCultMin,
-      inputCultMax,
-      seedType,
-      isCorrectInputName,
-      isCorrectInputGender,
-      isCorrectInputSpecies,
-      isCorrectInputGermMin,
-      isCorrectInputGermMax,
-      isCorrectInputCultMin,
-      isCorrectInputCultMax,
-      isCorrectSeedType,
-    } = store.get();
-
-    console.log(isCorrectInputName)
-    console.log(isCorrectInputGender)
-    console.log(isCorrectInputSpecies)
-    console.log(isCorrectInputGermMin)
-    console.log(isCorrectInputGermMax)
-    console.log(isCorrectInputCultMin)
-    console.log(isCorrectInputCultMax)
-    console.log(inputName)
-    console.log(inputName)
-    console.log(inputGender)
-    console.log(inputSpecies)
-    console.log(inputGermMin)
-    console.log(inputGermMax)
-    console.log(inputCultMin)
-    console.log(inputCultMax)
-    console.log(inputName)
-
-
-    if (
-      isCorrectInputName &&
-      isCorrectInputGender &&
-      isCorrectInputSpecies &&
-      isCorrectInputGermMin &&
-      isCorrectInputGermMax &&
-      isCorrectInputCultMin &&
-      isCorrectInputCultMax &&
-      isCorrectSeedType
-    ) {
-
-        console.log("correct")
-      const seedCollection = collection(firebaseDb, genericSeedCollection);
-
-      const docRef = await addDoc(seedCollection, {
-        name: inputName,
-        gender: inputGender,
-        species: inputSpecies,
-        germMin: inputGermMin,
-        germMax: inputGermMax,
-        cultMin: inputCultMin,
-        cultMax: inputCultMax,
-        seeType: seedType,
-      });
-    }
-    console.log("fin")
+    // if ( )
+    // .. <SetDoc></SetDoc>
 
     store.setKey("isBusy", false);
   }
 );
+// ---------------------------------------------------------------------
+
+export const checkSeed = action(newSeedStore, "checkSeed", (store) => {
+  store.setKey("isBusy", true);
+  const { input, inputCorrect } = store.get();
+
+  if (
+    inputCorrect.isCorrectName &&
+    inputCorrect.isCorrectGender &&
+    inputCorrect.isCorrectSpecies &&
+    inputCorrect.isCorrectGermMin &&
+    inputCorrect.isCorrectGermMax &&
+    inputCorrect.isCorrectCultMin &&
+    inputCorrect.isCorrectCultMax &&
+    inputCorrect.isCorrectSeedType
+  ) {
+    const newSeed = {
+      name: input.name,
+      gender: input.gender,
+      species: input.species,
+      germMin: input.germMin,
+      germMax: input.germMax,
+      cultMin: input.cultMin,
+      cultMax: input.cultMax,
+      seedType: input.seedType,
+      idFirebase: input.idFirebase,
+      isValide: true,
+    };
+
+    store.setKey("newSeed", newSeed);
+    store.setKey("isSeedCorrect", true);
+    return true;
+  }
+  return false;
+});
+
+// ---------------------------------------------------------------------
+export const saveCurrentSeed = action(
+  newSeedStore,
+  "saveSeed",
+  async (store) => {
+    store.setKey("isBusy", true);
+    const { newSeed } = store.get();
+
+    const mySeedCollection = collection(firebaseDb, seedCollection);
+    const myDoc = doc(mySeedCollection, newSeed.idFirebase);
+    const status = await setDoc(myDoc, newSeed);
+    store.setKey("isBusy", false);
+  }
+);
+// ---------------------------------------------------------------------
+export const addCurrentSeed = action(
+  newSeedStore,
+  "saveSeed",
+  async (store) => {
+    store.setKey("isBusy", true);
+    const { newSeed } = store.get();
+
+    const mySeedCollection = collection(firebaseDb, seedCollection);
+    const status = await addDoc(mySeedCollection, newSeed);
+    const newNewSeed = { ...newSeed, idFirebase: status.id };
+
+    store.setKey("newSeed", newNewSeed);
+    store.setKey("isBusy", false);
+  }
+);
+// ---------------------------------------------------------------------
+export const deleteSeed = action(
+  newSeedStore,
+  "saveSeed",
+  async (store, idFirebase: string) => {
+    store.setKey("isBusy", true);
+    // .. <SetDoc></SetDoc>
+    store.setKey("isBusy", false);
+  }
+);
+
+// ---------------------------------------------------------------------

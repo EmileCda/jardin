@@ -1,0 +1,20 @@
+# dark mode
+
+1. app.styke
+
+color : dark, lessdark, medium, lesslight, light
+
+colorNanostore : background, lessback, medium, lessFor, forground
+
+init :
+background= dark
+lessback = lessdark
+medium = medium
+lessFor = lesslight
+forground = light
+
+onclick light
+lessback = lesslight
+medium = medium
+lessFor = lessdark
+forground = darkmode

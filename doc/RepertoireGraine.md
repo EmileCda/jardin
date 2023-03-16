@@ -33,6 +33,7 @@ listeVar : [{
 1. graine, kcak / kg
 1. rendement par unité de production
 1. occupation par unité de production
+1. repartition glucide/ proteine
 
 ## phase 2
 

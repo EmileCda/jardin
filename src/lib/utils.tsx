@@ -29,3 +29,10 @@ return  dataScreen.reduce(
   (obj:any, item:any) => Object.assign(obj, { [item.key]: item[lang] }), {});
 
 }
+
+
+
+export function firstCap(myString : string) {
+  return myString.charAt(0).toUpperCase() + myString.slice(1);
+}
+
