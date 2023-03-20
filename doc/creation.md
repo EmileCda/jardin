@@ -7,7 +7,7 @@ npm install
 
 npm i react-router react-router-dom styled-components nanostores @nanostores/react
 npm i -D @types/styled-components
-npm i react-responsive
+npm i react-responsive ckeditor4-react
 
 npm run dev
 ```
@@ -18,6 +18,8 @@ add directories
 mkdir src/components
 mkdir src/types
 mkdir src/style
+mkdir src/lib
+mkdir src/data
 ```
 
 Github

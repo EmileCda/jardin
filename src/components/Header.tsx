@@ -1,6 +1,10 @@
 import { useStore } from "@nanostores/react";
-import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
+import fr from "./../images/fr.png";
+import en from "./../images/en.png";
+import es from "./../images/es.png";
+
+const tabFlag = [fr,es,en,]
 import {
   headerStore,
   setLang,
@@ -39,7 +43,8 @@ export function LanguageBar() {
         <img
           className={lang === item.id ? "hide" : ""}
           key={index}
-          src={item.urlFlag}
+          src={tabFlag[index]}
+          // src={fr}
           alt={item.description}
           onClick={() => setLang(item.id)}
         />

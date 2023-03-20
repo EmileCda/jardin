@@ -1,8 +1,7 @@
 import { getDownloadURL, ref } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { firebaseStorage } from "../lib/Firebase";
-import { textScreen } from "../lib/utils";
-import { Slide, SlideContainer } from "../style/carousel.style";
+import { Button, ButtonGroup, Caption, Slide, SlideContainer } from "../style/carousel.style";
 import jsonData from "./../data/localData.json";
 export const localData: any = jsonData;
 
@@ -79,10 +78,13 @@ export default function Test() {
               src={url ? url : "Empty seat"}
               alt={`image n° ${index}`}
             />
+            <Caption>texte caption</Caption>
           </Slide>
         ))}
-        <button onClick={foward}>foward</button>
-        <button onClick={backward}>backward</button>
+        <ButtonGroup>
+        <Button onClick={backward}><i className="fa-solid fa-backward-step"></i></Button>
+        <Button onClick={foward}><i className="fa-solid fa-forward-step"></i></Button>
+        </ButtonGroup>
       </SlideContainer>
     </>
   );

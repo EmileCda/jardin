@@ -10,6 +10,7 @@ import Needs from "./Needs";
 import NewSeed from "./NewSeed";
 import Seeds from "./Seeds";
 import Test from "./Test";
+import Tomate from "./Tomate";
 
 export default function App() {
 
@@ -45,6 +46,7 @@ export default function App() {
             <Route path="/NewSeed" element={<NewSeed />} />
             <Route path="/Calendar" element={<Calendar />} />
             <Route path="/About" element={<About />} />
+            <Route path="/Tomate" element={<Tomate />} />
             <Route path="/Test" element={<Test />} />
           </Routes>
 

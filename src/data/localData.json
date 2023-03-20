@@ -1,23 +1,37 @@
 {
   "AppName": "Jardin & mille",
+
+  "carousel": {
+    "images": [
+      "gs://jardin-77860.appspot.com/images/carousel/bar-café.jpg",
+      "gs://jardin-77860.appspot.com/images/carousel/landscape.jpg",
+      "gs://jardin-77860.appspot.com/images/carousel/morse.jpg",
+      "gs://jardin-77860.appspot.com/images/carousel/phare.jpg",
+      "gs://jardin-77860.appspot.com/images/carousel/stone.jpg",
+      "gs://jardin-77860.appspot.com/images/carousel/peche_au_gros.jpg",
+      "gs://jardin-77860.appspot.com/images/carousel/vacances-famille.jpg"
+    ],
+    "timer": 4000
+  },
+
   "language": [
     {
       "id": "fr",
       "name": "Français",
       "description": "Langue Française",
-      "urlFlag": "./src/image/fr.png"
+      "urlFlag": "./../public/image/fr.png"
     },
     {
       "id": "es",
       "name": "Español",
       "description": "Lengua española",
-      "urlFlag": "./src/image/es.png"
+      "urlFlag": "./../public/image/es.png"
     },
     {
       "id": "en",
       "name": "English",
       "description": "English speaking",
-      "urlFlag": "./src/image/en.png"
+      "urlFlag": "./../public/image/en.png"
     }
   ],
 
@@ -25,61 +39,61 @@
     {
       "fr": "Accueil",
       "en": "Home",
-      "es": "[ES] Accueil",
+      "es": "Inicio",
       "link": "./"
     },
     {
       "fr": "Besoin",
       "en": "Needs",
-      "es": "[ES] Besoin",
+      "es": "Necesidades",
       "link": "./Needs"
     },
     {
       "fr": "Graine",
       "en": "Seeds",
-      "es": "[ES] Graine",
+      "es": "Semillas",
       "link": "./Seeds"
     },
     {
       "fr": "Itinéraire",
       "en": "itinary",
-      "es": "[ES] Itinéraire",
+      "es": "itinerario",
       "link": "./itinary"
     },
     {
       "fr": "Planche",
       "en": "Planting bed",
-      "es": "[ES] Planche",
+      "es": "Lecho de siembra",
       "link": "./PlantingBed"
     },
     {
       "fr": "Tâches",
       "en": "Tasks",
-      "es": "[PR] Tâche",
+      "es": "Tareas",
       "link": "./Task"
     },
     {
       "fr": "Suivi",
       "en": "Monitoring",
-      "es": "[ES] Suivi",
+      "es": "Monitorización",
       "link": "./Monitoring"
     },
     {
       "fr": "Calendrier",
       "en": "Calendar",
-      "es": "[ES] Calendrier",
+      "es": "Calendario",
       "link": "./Calendar"
     },
     {
       "fr": "Contact",
       "en": "Contact",
-      "es": "[ES] Contact",
+      "es": "Contacto",
       "link": "./Contact"
     },
     {
       "fr": "A propos",
       "en": "About",
-      "es": "[ES] A propos",
+      "es": "Acerca de",
       "link": "./About"
     },
     {
@@ -94,129 +108,122 @@
       "key": "screenName",
       "fr": "Graines",
       "en": "Seeds",
-        "es": "Semillas"
-      
+      "es": "Semillas"
     },
     {
       "key": "newSeed",
       "fr": "Nouvelle graine",
       "en": "New seed",
-        "es": "nueva semilla"
-      
+      "es": "nueva semilla"
     },
-    { 
+    {
       "key": "exit",
-  
-    "fr": "Quitter", "en": "exit", "es": "salida" } 
+
+      "fr": "Quitter",
+      "en": "exit",
+      "es": "salida"
+    }
   ],
   "screenNewSeeds": [
     {
       "key": "screenName",
       "fr": "Nouvelle Graine",
       "en": "New Seeds",
-        "es": "Nueva Semilla"
-      
+      "es": "Nueva Semilla"
     },
     {
       "key": "name",
       "fr": "Nom",
       "en": "name",
-        "es": "nombre"
-      
+      "es": "nombre"
     },
     {
       "key": "gender",
       "fr": "genre",
       "en": "gender",
-        "es": "género"
-      
-    }
-    ,
+      "es": "género"
+    },
     {
       "key": "species",
       "fr": "espèce",
       "en": "species",
-        "es": "especies"
-      
+      "es": "especies"
     },
     {
       "key": "GerminationTemperature",
       "fr": "Température de germination",
       "en": "Germination temperature",
-        "es": "Temperatura de germinación"
-      
+      "es": "Temperatura de germinación"
     },
     {
       "key": "MinTemp",
       "fr": "Temp. min.",
       "en": "Min. Temp.",
-        "es": "Temp. mín."
-      
+      "es": "Temp. mín."
     },
     {
       "key": "MaxTemp",
       "fr": "Temp. max.",
       "en": "Max. Temp.",
-        "es": "Temp. máx."
-      
+      "es": "Temp. máx."
     },
     {
       "key": "CultivationTemperature",
       "fr": "Température de culture",
       "en": "Cultivation temperature",
-        "es": "Temperatura de cultivo"
-      
+      "es": "Temperatura de cultivo"
     },
     {
       "key": "vegetable",
       "fr": "potagère",
       "en": "vegetable",
-        "es": "vegetal"
-      
+      "es": "vegetal"
     },
     {
       "key": "aromatic",
       "fr": "Température",
       "en": "aromatic",
-        "es": "aromatica"
-      
+      "es": "aromatica"
     },
     {
       "key": "medicinal",
       "fr": "Température",
       "en": "medicinal",
-        "es": "medicinal"
-      
+      "es": "medicinal"
     },
     {
       "key": "flower",
       "fr": "Température",
       "en": "florwer",
-        "es": "flor"
-      
+      "es": "flor"
     },
     {
       "key": "perennial",
       "fr": "Température",
       "en": "perennial",
-        "es": "perenne"
-      
+      "es": "perenne"
     },
     {
       "key": "save",
       "fr": "enregister",
       "en": "save",
-        "es": "guardar"
-      
+      "es": "guardar"
     }
-
-
   ],
-  "seedType":{
-    "vegetable":1,
-    "aromatic":2,
-    "medicinal":4,
-    "flower":8,
-    "perennial" :16}
+  "screenTest": [
+    {
+      "key": "screenName",
+      "fr": "Test",
+      "en": "Test",
+      "es": "Test"
+    }
+  ],
 
+  "seedType": {
+    "vegetable": 1,
+    "aromatic": 2,
+    "medicinal": 4,
+    "flower": 8,
+    "perennial": 16
+  }
 }
