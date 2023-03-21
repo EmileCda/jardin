@@ -60,7 +60,7 @@ export function MenuNav() {
   const { lang } = useStore(headerStore);
 
   return (
-    <LanguageBarContainer>
+    <div>
       <ul>
         {navBar.map((item: JsonLink, index: number) => (
           <li key={index} onClick={toggleIsVisibleTossMenu}>
@@ -70,7 +70,7 @@ export function MenuNav() {
           </li>
         ))}
       </ul>
-    </LanguageBarContainer>
+    </div>
   );
 }
 

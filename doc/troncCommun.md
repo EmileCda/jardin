@@ -6,8 +6,9 @@
 
 [header mobil](https://www.figma.com/file/A1Ix7uxonfjNDaqDJaDkjr/Jardin?node-id=2%3A22&t=qouVAYZ5dh0HlnJb-0)
 
-body
-footer
-responsive
-toggle language
-mode sombre
+1. body
+1. footer
+1. responsive
+1. toggle language
+1. mode sombre
+1. [Carousel-firebase](https://github.com/EmileCda/firestore-carousel)

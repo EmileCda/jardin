@@ -3,13 +3,24 @@
 
   "carousel": {
     "images": [
-      "gs://jardin-77860.appspot.com/images/carousel/bar-café.jpg",
-      "gs://jardin-77860.appspot.com/images/carousel/landscape.jpg",
-      "gs://jardin-77860.appspot.com/images/carousel/morse.jpg",
-      "gs://jardin-77860.appspot.com/images/carousel/phare.jpg",
-      "gs://jardin-77860.appspot.com/images/carousel/stone.jpg",
-      "gs://jardin-77860.appspot.com/images/carousel/peche_au_gros.jpg",
-      "gs://jardin-77860.appspot.com/images/carousel/vacances-famille.jpg"
+      { "name":"bar-café.jpg","caption" :"un bar qui fait du café dans une ambiance flou"}, 
+      { "name":"landscape.jpg","caption" :"un paysage de campagne "},
+      { "name":"morse.jpg","caption" :"Un morse avec d'autre morse en noir et blanc"},
+      { "name":"phare.jpg","caption" :"le phare du bout du monde"},
+      { "name":"stone.jpg","caption" :"stone edge ou son cousin "},
+      { "name":"peche_au_gros.jpg","caption" :"la peche au gros a carry le rouet"},
+      { "name":"vacances-famille.jpg","caption" :"Famille en vacance sur la plage "}
+  ],
+    "timer": 4000
+  }, "Kar": {
+    "images": [
+        { "name":"bar-café.jpg","caption" :"text bar-café"},
+        { "name":"landscape.jpg","caption" :"text landscape"},
+        { "name":"morse.jpg","caption" :"text morse"},
+        { "name":"phare.jpg","caption" :"text phare"},
+        { "name":"stone.jpg","caption" :"text stone"},
+        { "name":"peche_au_gros.jpg","caption" :"text peche_au_gros"},
+        { "name":"vacances-famille.jpg","caption" :"text landvacances-famillescape"}
     ],
     "timer": 4000
   },

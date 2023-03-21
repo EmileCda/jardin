@@ -21,20 +21,20 @@ export const Slide = styled.li<{display:boolean}>`
   margin: 0;
   max-width: 100vw;
   padding:0 1rem;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   img{
-    max-width: 95vw;
+    z-index: -1;
+    max-width: 100vw;
+    padding: 0 0.6rem;
     margin: 0;
   }
 `;
 
 export const Caption = styled.div`
   position: absolute;
-  min-width: 95vw;
+  min-width: 100vw;
+  padding: 0 1rem;
   bottom: 2rem;
-  padding:0 4rem;
   justify-content: center;
   font-size: 0.7rem;
   color: black;

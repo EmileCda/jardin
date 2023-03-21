@@ -43,6 +43,8 @@ export const LanguageBarContainer = styled.div`
   }
 `;
 
+
+
 export const MenuBuger = styled.div`
   background-color: ${AppTheme.colors.lessDark};
   font-size: 2rem;
@@ -59,6 +61,7 @@ export const MenuBuger = styled.div`
 
 export const MenuNavContainer = styled.div<{ isClicked: boolean }>`
   position: absolute;
+  z-index: 1;
   min-width: 100vw;
   top: 100px;
   margin-left: ${(props) => (props.isClicked ? "0%" : "200%")};

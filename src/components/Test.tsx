@@ -1,89 +1,19 @@
-import { getDownloadURL, ref } from "firebase/storage";
-import { useEffect, useState } from "react";
-import { firebaseStorage } from "../lib/Firebase";
-import { textScreen } from "../lib/utils";
-import { Slide, SlideContainer } from "../style/carousel.style";
-import jsonData from "./../data/localData.json";
-export const localData: any = jsonData;
-
-const urlCarousel = localData.carousel.images;
-const timerCount = localData.carousel.timer;
-
-/**
- * This compoment create a carousel
- * picture to display are defined in json file  "./../data/localData.json";
- * first load image from firestore when all image are loaded then run the slider
- * timer value is in json file key = carousel.timer
- */
-
 export default function Test() {
-  // stat for img loaded from firestore
-  const [imgList, setImgList] = useState(urlCarousel);
-  // stade for initial loading
-  const [loading, setLoading] = useState(true);
-  // state for the index of picture to display
-  const [displayIndex, setDisplayIndex] = useState(0);
-
-  useEffect(() => {
-    if (loading === false) {
-      return;
-    }
-    // fetching image from firestore
-    function fetchImg() {
-      let newPicList = Array(urlCarousel.length);
-      urlCarousel.map(async (url: string, index: number) => {
-        const newUrl = await getDownloadURL(ref(firebaseStorage, url));
-        newPicList[index] = newUrl;
-
-        if (!newPicList.includes(undefined)) {
-          // stop loading when every pic have and ulr
-          setLoading(false);
-          setImgList(newPicList);
-        }
-      });
-    }
-    fetchImg();
-  }, [loading]);
-
-  /**
-   * this function increment displayIndex by 1 and back to 0 when reach length
-   */
-  function foward() {
-    const currentIndex = displayIndex;
-    if (currentIndex < imgList.length - 1) {
-      setDisplayIndex(currentIndex + 1);
-    } else {
-      setDisplayIndex(0);
-    }
-  }
-
-  /**
-   * this function decrement displayIndex by 1 and go to length when 0 is reached
-   */
-  function backward() {
-    const currentIndex = displayIndex;
-    if (currentIndex > 0) {
-      setDisplayIndex(currentIndex - 1);
-    } else {
-      setDisplayIndex(imgList.length - 1);
-    }
-  }
-  setTimeout(foward, timerCount); // automatic increment displayIndex with number of ms defined in json file
+  const myListBox = [
+    "option_1",
+    "option_2",
+    "option_3",
+    "option_4",
+    "option_5",
+  ];
 
   return (
     <>
-      <SlideContainer>
-        {imgList.map((url: string, index: number) => (
-          <Slide key={index} display={index === displayIndex}>
-            <img
-              src={url ? url : "Empty seat"}
-              alt={`image n° ${index}`}
-            />
-          </Slide>
+      <select name="Name_of_list_box" >
+        {myListBox.map((item: string, index: number) => (
+          <option key={index}>{item}</option>
         ))}
-        <button onClick={foward}>foward</button>
-        <button onClick={backward}>backward</button>
-      </SlideContainer>
+      </select>
     </>
   );
 }

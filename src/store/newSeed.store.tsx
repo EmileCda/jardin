@@ -171,10 +171,8 @@ export const loadSeedList = action(
     // const myQuery = query(myCollection,seedCollection);
     const myQuerryDocSnapshot = await getDocs(myCollection);
 
-    console.log(myQuerryDocSnapshot);
     let newSeedList:Tseed[]=[];
     myQuerryDocSnapshot.forEach((oneDoc) => {
-      console.log(oneDoc.id, "=>", oneDoc.data());
       const oneSeed: any = oneDoc.data();
       const newSeed: Tseed = {...oneSeed, idFirebase: oneDoc.id};
       newSeedList.push(newSeed);
@@ -183,6 +181,7 @@ export const loadSeedList = action(
 
     // saveSeedList();
     setIsBusy(false);
+    setIsLoaded(true);
   }
 );
 
