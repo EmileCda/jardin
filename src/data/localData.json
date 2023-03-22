@@ -229,13 +229,30 @@
       "es": "Test"
     }
   ],
+  "screenNewVariety": [
+    {
+      "key": "screenName",
+      "fr": "Nouvelle Variété",
+      "en": "New Variety",
+      "es": "Nueva variedad"
+    },
+    {
+      "key": "addVariety",
+      "fr": "Ajouter une nouvelle variété",
+      "en": "Add new Variety",
+      "es": "Añadir nueva variedad"
+    }
+  ],
   "screenVariety": [
     {
       "key": "screenName",
       "fr": "Variété",
       "en": "Variety",
-      "es": "[ES] Variety"
+      "es": "Variedad"
     }
+
+
+    
   ],
 
   "seedType": {

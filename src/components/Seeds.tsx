@@ -15,7 +15,7 @@ export type DisplaySeedProps = {
 export function DisplaySeed( {item, index} : DisplaySeedProps) {
   return (
     <>
-    <MyLink to="/Variety">
+    <MyLink to="/NewVariety">
       <Seed key={index} onClick={() => setIdCurrentSeed(item.idFirebase)}>
         <Title>{item.name}</Title>
         <SeedId>{item.idFirebase}</SeedId>

@@ -8,6 +8,7 @@ import Calendar from "./Calendar";
 import Header from "./Header";
 import Needs from "./Needs";
 import NewSeed from "./NewSeed";
+import NewVariety from "./NewVariety";
 import Seeds from "./Seeds";
 import Test from "./Test";
 import Tomate from "./Tomate";
@@ -47,8 +48,9 @@ export default function App() {
             <Route path="/NewSeed" element={<NewSeed />} />
             <Route path="/Calendar" element={<Calendar />} />
             <Route path="/About" element={<About />} />
-            <Route path="/Variety" element={<Variety />} />
+            <Route path="/NewVariety" element={<NewVariety />} />
             <Route path="/Tomate" element={<Tomate />} />
+            <Route path="/Variety" element={<Variety />} />
             <Route path="/Test" element={<Test />} />
           </Routes>
 
