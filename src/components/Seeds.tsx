@@ -3,35 +3,52 @@ import { Link } from "react-router-dom";
 import { textScreen } from "../lib/utils";
 import { headerStore } from "../store/Header.store";
 import { loadSeedList, newSeedStore, Tseed } from "../store/newSeed.store";
+import { setIdCurrentSeed } from "../store/Seed.store";
+import { MyLink, Seed, SeedId, SeedMainContainer, Title } from "../style/Seeds.style";
 
+export type DisplaySeedProps = {
+  item: Tseed;
+  index: number;
+};
+
+// -----------------------------------------------------------------------
+export function DisplaySeed( {item, index} : DisplaySeedProps) {
+  return (
+    <>
+    <MyLink to="/Variety">
+      <Seed key={index} onClick={() => setIdCurrentSeed(item.idFirebase)}>
+        <Title>{item.name}</Title>
+        <SeedId>{item.idFirebase}</SeedId>
+      </Seed>
+      </MyLink>
+    </>
+  );
+}
+// -----------------------------------------------------------------------
 /**
  * this function do ...
  */
 export default function Seeds() {
+  const myTextScreen = textScreen("Seeds");
+  const { input, seedList, isLoaded } = useStore(newSeedStore);
 
-const myTextScreen = textScreen("Seeds");
-const { input, seedList, isLoaded } = useStore(newSeedStore);
-
-if (!isLoaded){
-  loadSeedList()
-}
+  if (!isLoaded) {
+    loadSeedList();
+  }
 
   return (
     <>
       <h1>{myTextScreen.screenName}</h1>
-      <ul>
+      <SeedMainContainer>
         {seedList.map((item: Tseed, index: number) => (
-          <li key={index}>
-            {item.name} {item.idFirebase}
-          </li>
+          <DisplaySeed item={item} index={index} />
         ))}
-        
-      </ul>
-
+      </SeedMainContainer>
 
       <Link to="/NewSeed">
-      <button>{myTextScreen.newSeed}</button></Link>
+        <button>{myTextScreen.newSeed}</button>
+      </Link>
     </>
   );
 }
-
+// -----------------------------------------------------------------------

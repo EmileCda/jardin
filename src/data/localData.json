@@ -229,6 +229,14 @@
       "es": "Test"
     }
   ],
+  "screenVariety": [
+    {
+      "key": "screenName",
+      "fr": "Variété",
+      "en": "Variety",
+      "es": "[ES] Variety"
+    }
+  ],
 
   "seedType": {
     "vegetable": 1,

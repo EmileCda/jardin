@@ -1,51 +1,72 @@
 # définiton de la collection seed
 
-contient les graines générique et les variétées
+Contient les graines générique et les variétées
 
-JsonSeed=[
-
-{
-
-nom : "nom" ;
-properties2 : "properties2";
-properties3 : "properties3";
-properties4 : "properties4";
-variety :[
-
-    {
-      nom : "nom",
-      properties1 : "properties1" ,
-      properties2 : "properties2",
-      properties3 : "properties3",
-      properties4 : "properties4",
-
+```js
+export type sonSeed = [
+  {
+    id: "IDTOMATE",
+    nom: "tomate",
+    minGermTemp: "15",
+    maxGermTemp: "30",
+    minCultTemp: "15",
+    maxCultTemp: "35",
+    Seasonality: "early",
+    variety: [
+      {
+        nom: "Marmande",
+        minGermTemp: "14",
+        maxGermTemp: "28",
+        averageWeight: "80",
       },
       {
-        nom : "nom",
-        properties1 : "properties1" ,
-        properties2 : "properties2",
-        properties3 : "properties3",
-        properties4 : "properties4",
-
-        },
-        {
-          nom : "nom",
-          properties1 : "properties1" ,
-          properties2 : "properties2",
-          properties3 : "properties3",
-          properties4 : "properties4",
-
-          },
-          {
-            nom : "nom",
-            properties1 : "properties1" ,
-            properties2 : "properties2",
-            properties3 : "properties3",
-            properties4 : "properties4",
-
-            }
-
-]
-}
-
-]
+        nom: "Golden nugget",
+        averageWeight: "10",
+      },
+      {
+        nom: "Saint Pierre",
+        averageWeight: "250",
+        Seasonality: "late",
+      },
+      {
+        nom: "Salade",
+        averageWeight: "150",
+        Seasonality: "mi-season",
+      }
+    ],
+  },
+  {
+    id: "IDPIMENT",
+    nom: "Piment",
+    minGermTemp: "18",
+    maxGermTemp: "32",
+    minCultTemp: "15",
+    maxCultTemp: "40",
+    Seasonality: "early",
+    variety: [
+      {
+        nom: "Thaï",
+        minGermTemp: "14",
+        maxGermTemp: "28",
+        averageWeight: "80",
+      },
+      {
+        nom: "Cayenne",
+        averageWeight: "12",
+        minCultTemp: "15",
+        maxCultTemp: "25",
+        Seasonality: "late",
+      },
+      {
+        nom: "Corne de gazelle",
+        averageWeight: "25",
+      },
+      {
+        nom: "Antillais",
+        averageWeight: "150",
+        Seasonality: "mi-season",
+      }
+    ],
+  }
+];
+```

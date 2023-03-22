@@ -16,19 +16,29 @@ export const DevideMinSize = {
   screen: "1832x",
 };
 
+export const colorsInit= {
+  dark: "#004b23",
+  lessDark: "#007200",
+  medium: "#008000",
+  lessLight: "#70e000",
+  light: "#ccff33",
+};
+
 export const AppTheme = {
   colors: {
-    dark: "#004b23",
-    lessDark: "#007200",
-    medium: "#008000",
-    lessLight: "#70e000",
-    light: "#ccff33",
+    background: colorsInit.dark ,
+    lessBG: colorsInit.lessDark ,
+    medium:colorsInit.medium ,
+    lessFG: colorsInit.lessLight ,
+    forground: colorsInit.light ,
   },
   font: {
     regular: "Gloria Hallelujah, cursive",
     extra: "Poppins, sans-serif",
     Logo: "Lobster, cursive",
     Logo2: "Bilbo Swash Caps, cursive",
+    fontSize: "18px",
+
   },
   BorderRadius: "0.6rem",
 };
@@ -46,7 +56,7 @@ export const App = styled.div`
  */
 export const AppGlobalStyle = createGlobalStyle`
   :root {
-    background-color:${AppTheme.colors.dark};
+    background-color:${AppTheme.colors.background};
     text-decoration: none;
   }
   html, body, #root {
