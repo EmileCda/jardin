@@ -2,9 +2,10 @@ import { useStore } from "@nanostores/react";
 import { Link } from "react-router-dom";
 import { textScreen } from "../lib/utils";
 import { headerStore } from "../store/Header.store";
-import { loadSeedList, newSeedStore, Tseed } from "../store/newSeed.store";
+import { loadSeedList, newSeedStore, Tseed } from "../store/NewSeed.store";
 import { setIdCurrentSeed } from "../store/Seed.store";
-import { MyLink, Seed, SeedId, SeedMainContainer, Title } from "../style/Seeds.style";
+import { MyLink, Title } from "../style/Common.style";
+import {  Seed, SeedId, SeedMainContainer } from "../style/Seeds.style";
 
 export type DisplaySeedProps = {
   item: Tseed;
@@ -15,7 +16,7 @@ export type DisplaySeedProps = {
 export function DisplaySeed( {item, index} : DisplaySeedProps) {
   return (
     <>
-    <MyLink to="/NewVariety">
+    <MyLink to="/Variety">
       <Seed key={index} onClick={() => setIdCurrentSeed(item.idFirebase)}>
         <Title>{item.name}</Title>
         <SeedId>{item.idFirebase}</SeedId>

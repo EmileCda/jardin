@@ -10,7 +10,7 @@ import {
   setInputString,
   setIsLoaded,
   Tseed,
-} from "../store/newSeed.store";
+} from "../store/NewSeed.store";
 
 /**
  * this function create a new generic

@@ -17,11 +17,11 @@ export const DevideMinSize = {
 };
 
 export const colorsInit= {
-  dark: "#004b23",
-  lessDark: "#007200",
-  medium: "#008000",
-  lessLight: "#70e000",
-  light: "#ccff33",
+  dark: "#996433",
+  lessDark: "#C1966E",
+  medium: "#557859",
+  lessLight: "CB9F77",
+  light: "#F2CDAB",
 };
 
 export const AppTheme = {

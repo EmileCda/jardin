@@ -37,12 +37,7 @@ export default function Carousel() {
       let newPicList = Array(urlCarousel.length);
       urlCarousel.map(async (url: TSlide, index: number) => {
         const newUrl = await getDownloadURL(ref(firebaseStorage, "images/carousel/"+ url.name));
-        console.log(url)
-        console.log(url.name)
-        console.log(url.caption)
         newPicList[index] = { name : newUrl,caption:url.caption} ;
-console.log (newPicList)
-console.log (loading)
         if (!newPicList.includes(undefined)) {
           // stop loading when every pic have and ulr
           setLoading(false);

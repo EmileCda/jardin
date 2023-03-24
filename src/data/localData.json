@@ -112,6 +112,12 @@
       "en": "Test",
       "es": "Prueba",
       "link": "./Test"
+    },
+    {
+      "fr": "Variétée",
+      "en": "Variety",
+      "es": "[es] Variety",
+      "link": "./Variety"
     }
   ],
   "screenSeeds": [
@@ -237,11 +243,43 @@
       "es": "Nueva variedad"
     },
     {
-      "key": "addVariety",
-      "fr": "Ajouter une nouvelle variété",
-      "en": "Add new Variety",
-      "es": "Añadir nueva variedad"
+      "key": "saveVariety",
+      "fr": "Sauvegarder",
+      "en": "Save",
+      "es": "[es]Save"
+    },
+    {
+      "key": "nameLabel",
+      "fr": "Nom de la variété",
+      "en": "Variety Name",
+      "es": "Nombre del variedad "
+    },
+    {
+      "key": "germTemp",
+      "fr": "Temperature de germination",
+      "en": "Germination temperature",
+      "es": "Temperatura de germinación"
+    },
+    {
+      "key": "minGermTemp",
+      "fr": "Temp germ min",
+      "en": "min germ Temp",
+      "es": "Temp germ min"
+    },
+    {
+      "key": "maxGermTemp",
+      "fr": "Temp germ max",
+      "en": "max germ Temp",
+      "es": "Temp germ max"
+    },
+    {
+      "key": "dureeGermMin",
+      "fr": "Durée de germination",
+      "en": "Germination duration",
+      "es": "Duración de la germinación"
     }
+    
+
   ],
   "screenVariety": [
     {
@@ -249,6 +287,12 @@
       "fr": "Variété",
       "en": "Variety",
       "es": "Variedad"
+    },
+    {
+      "key": "addVariety",
+      "fr": "Ajouter une nouvelle variété",
+      "en": "Add new Variety",
+      "es": "Añadir nueva variedad"
     }
 
 

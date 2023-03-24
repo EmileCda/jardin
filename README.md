@@ -69,4 +69,6 @@ npm install ckeditor4-react
 
 ## Spécification
 
+1. [Ancien structure table](./doc/old-table_definition.md)
 1. [collection Seeds](./doc/definition-table-seed.md)
+1. [variete](./doc/variety.md)
