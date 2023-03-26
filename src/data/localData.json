@@ -273,12 +273,89 @@
       "es": "Temp germ max"
     },
     {
-      "key": "dureeGermMin",
+      "key": "germTime",
       "fr": "Durée de germination",
       "en": "Germination duration",
       "es": "Duración de la germinación"
+    },
+    {
+      "key": "minGermTime",
+      "fr": "Durée germ min",
+      "en": "min germ duration",
+      "es": "[es] duree germ min"
+    },
+    {
+      "key": "maxGermTime",
+      "fr": "Durée germ max",
+      "en": "max germ duration",
+      "es": "[es] duree germ max"
+    },
+    {
+      "key": "growTemp",
+      "fr": "Température de culture",
+      "en": "germ temp",
+      "es": "[es] germ temp"
+    },
+    {
+      "key": "minGrowTemp",
+      "fr": "température culture min",
+      "en": "min cult temp",
+      "es": "[es] min cult temp"
+    },
+    {
+      "key": "maxGrowTemp",
+      "fr": "Température germ max",
+      "en": "max cult temp",
+      "es": "[es] max cult temp"
+    },
+    {
+      "key": "growTime",
+      "fr": "durée de culture",
+      "en": "grow time",
+      "es": "[es] grow time"
+    },
+    {
+      "key": "minGrowTime",
+      "fr": "durée culture min",
+      "en": "min grow temp",
+      "es": "[es] min grow temp"
+    },
+    {
+      "key": "maxGrowTime",
+      "fr": "Température culture max",
+      "en": "max cult time",
+      "es": "[es] max cult time"
+    },
+    {
+      "key": "yield",
+      "fr": "rendement",
+      "en": "yield",
+      "es": "[es] yield"
+    },
+    {
+      "key": "minYield",
+      "fr": "rendement min",
+      "en": "min yield",
+      "es": "[es] min yield"
+    },
+    {
+      "key": "maxYield",
+      "fr": "rendement max",
+      "en": "max yield",
+      "es": "[es] max yield"
+    },
+    {
+      "key": "zeroVeg",
+      "fr": "Zéro vegetation",
+      "en": "Zero vegetation",
+      "es": "[es] Zero vegetation"
+    },
+    {
+      "key": "rusticity",
+      "fr": "rusticité ",
+      "en": "rusticity",
+      "es": "[es] rusticity"
     }
-    
 
   ],
   "screenVariety": [

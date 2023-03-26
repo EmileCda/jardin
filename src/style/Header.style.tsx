@@ -5,7 +5,7 @@ import { AppTheme, DevideMinSize } from "./App.style";
  * Container for the open menu
  */
 export const HeaderContainer = styled.div`
-  background-color: ${AppTheme.colors.dark};
+  background-color: ${AppTheme.colors.background};
   display: flex;
   justify-content: space-around;
   position: fixed;
@@ -14,10 +14,12 @@ export const HeaderContainer = styled.div`
   left: 0;
   right: 0;
   padding: 0px 10px;
+  z-index: -1;
+
 `;
 
 export const Logo = styled.div`
-  color: ${AppTheme.colors.light};
+  color: ${AppTheme.colors.forground};
   font-size: 2rem;
   font-family: ${AppTheme.font.Logo};
   min-height: 100px;
@@ -32,7 +34,6 @@ export const Logo = styled.div`
 `;
 
 export const LanguageBarContainer = styled.div`
-  /* background-color: ${AppTheme.colors.lessLight}; */
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -46,7 +47,7 @@ export const LanguageBarContainer = styled.div`
 
 
 export const MenuBuger = styled.div`
-  background-color: ${AppTheme.colors.lessDark};
+  background-color: ${AppTheme.colors.lessBG};
   font-size: 2rem;
   display: flex;
   flex-direction: row;
@@ -61,7 +62,7 @@ export const MenuBuger = styled.div`
 
 export const MenuNavContainer = styled.div<{ isClicked: boolean }>`
   position: absolute;
-  z-index: 1;
+  z-index: -1;
   min-width: 100vw;
   top: 100px;
   margin-left: ${(props) => (props.isClicked ? "0%" : "200%")};
@@ -69,7 +70,7 @@ export const MenuNavContainer = styled.div<{ isClicked: boolean }>`
   line-height: 3rem;
   transition: all 0.5s ease-out;
   opacity: 0.5;
-  background-color: ${AppTheme.colors.lessLight};
+  background-color: ${AppTheme.colors.lessFG};
   ul {
     list-style-type: none;
   }

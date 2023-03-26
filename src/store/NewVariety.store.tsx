@@ -10,104 +10,121 @@ import { TLang } from "../types/App.type";
 import { tempMin } from "./NewSeed.store";
 import { Tvariety, varietyInit } from "./Variety.store";
 
-type TfieldString =
-  | "Espece"
-  | "variete"
-  | "cultivar:"
-  | "name"
-  | "remarques"
-  | "idFirebase";
+export enum PrintMedia {
+  Newspaper,
+  Newsletter,
+  Magazine,
+  Book,
+}
 
-type TfieldNumber =
-  | "idVariety"
-  | "categorie"
-  | "rusticite"
-  | "tempGermMin"
-  | "tempGermMax"
-  | "dureeGermMin"
-  | "dureeGermMax"
-  | "zeroVeg"
-  | "tempCultMin"
-  | "tempCultMax"
-  | "dureeCultMin"
-  | "dureeCultMax"
-  | "rendementMin"
-  | "rendementMax"
-  | "calorie"
-  | "proteide"
-  | "lipide"
-  | "glucide"
-  | "poidsMilleGraine"
-  | "profondeurSemis"
-  | "distanceEntreGraine"
-  | "distanceEntreRang"
-  | "occupationHauteur"
-  | "occupationSol";
+export enum TfieldString {
+  specie,
+  variety,
+  cultivar,
+  name,
+  remarks,
+  idFirebase,
+}
+
+
+export enum TfieldNumber {
+  idVariety ="idVariety",
+  category ="category",
+  rusticity ="rusticity",
+  minGermTemp ="minGermTemp",
+  maxGermTemp ="maxGermTemp",
+  minGermTime ="minGermTime",
+  maxGermTime ="maxGermTime",
+  zeroVeg ="zeroVeg",
+  minGrowTemp ="minGrowTemp",
+  maxGrowTemp ="maxGrowTemp",
+  minGrowTime ="minGrowTime",
+  maxGrowTime ="maxGrowTime",
+  minYield ="minYield",
+  maxYield ="maxYield",
+  calorie ="calorie",
+  protein ="protein",
+  lipid ="lipid",
+  carbohydrate ="carbohydrate",
+  tGW ="tGW",
+  sowingDepth ="sowingDepth",
+  seedSpacing ="seedSpacing",
+  rowSpacing ="rowSpacing",
+  height ="height",
+  floorSpace ="floorSpace"
+} ;
+
+  enum Color{
+    Red, Green
+}
+
+
+
 
 export type TnewVarietyInputCorrect = {
-  isCorrectIdFirebase: boolean;
   isCorrectIdVariety: boolean;
-  isCorrectCategorie: boolean;
+  isCorrectCategory: boolean;
   isCorrectRusticite: boolean;
-  isCorrectTempGermMin: boolean;
-  isCorrectTempGermMax: boolean;
-  isCorrectDureeGermMin: boolean;
-  isCorrectDureeGermMax: boolean;
+  isCorrectMinGermTemp: boolean;
+  isCorrectMaxGermTemp: boolean;
+  isCorrectMinGermTime: boolean;
+  isCorrectMaxGermTime: boolean;
   isCorrectZeroVeg: boolean;
-  isCorrectTempCultMin: boolean;
-  isCorrectTempCultMax: boolean;
-  isCorrectDureeCultMin: boolean;
-  isCorrectDureeCultMax: boolean;
-  isCorrectRendementMin: boolean;
-  isCorrectRendementMax: boolean;
+  isCorrectMinGrowTemp: boolean;
+  isCorrectMaxGrowTemp: boolean;
+  isCorrectMinGrowTime: boolean;
+  isCorrectMaxGrowTime: boolean;
+  isCorrectMinYield: boolean;
+  isCorrectMaxYield: boolean;
   isCorrectCalorie: boolean;
-  isCorrectProteide: boolean;
-  isCorrectLipide: boolean;
-  isCorrectGlucide: boolean;
-  isCorrectPoidsMilleGraine: boolean;
-  isCorrectProfondeurSemis: boolean;
-  isCorrectDistanceEntreGraine: boolean;
-  isCorrectDistanceEntreRang: boolean;
-  isCorrectOccupationHauteur: boolean;
-  isCorrectOccupationSol: boolean;
-  isCorrectEspece: boolean;
-  isCorrectVariete: boolean;
+  isCorrectProtein: boolean;
+  isCorrectLipid: boolean;
+  isCorrectCarbohydrate: boolean;
+  isCorrectTGW: boolean;
+  isCorrectSowingDepth: boolean;
+  isCorrectSeedSpacing: boolean;
+  isCorrectRowSpacing: boolean;
+  isCorrectHeight: boolean;
+  isCorrectFloorSpace: boolean;
+  isCorrectSpecie: boolean;
+  isCorrectVariety: boolean;
   isCorrectCultivar: boolean;
   isCorrectName: boolean;
-  isCorrectRemarques: boolean;
+  isCorrectRemarks: boolean;
+  isCorrectIdFirebase: boolean;
 };
 
 const inputInit: TnewVarietyInputCorrect = {
-  isCorrectIdFirebase: false,
   isCorrectIdVariety: false,
-  isCorrectCategorie: false,
+  isCorrectCategory: false,
   isCorrectRusticite: false,
-  isCorrectTempGermMin: false,
-  isCorrectTempGermMax: false,
-  isCorrectDureeGermMin: false,
-  isCorrectDureeGermMax: false,
+  isCorrectMinGermTemp: false,
+  isCorrectMaxGermTemp: false,
+  isCorrectMinGermTime: false,
+  isCorrectMaxGermTime: false,
   isCorrectZeroVeg: false,
-  isCorrectTempCultMin: false,
-  isCorrectTempCultMax: false,
-  isCorrectDureeCultMin: false,
-  isCorrectDureeCultMax: false,
-  isCorrectRendementMin: false,
-  isCorrectRendementMax: false,
+  isCorrectMinGrowTemp: false,
+  isCorrectMaxGrowTemp: false,
+  isCorrectMinGrowTime: false,
+  isCorrectMaxGrowTime: false,
+  isCorrectMinYield: false,
+  isCorrectMaxYield: false,
   isCorrectCalorie: false,
-  isCorrectProteide: false,
-  isCorrectLipide: false,
-  isCorrectGlucide: false,
-  isCorrectPoidsMilleGraine: false,
-  isCorrectProfondeurSemis: false,
-  isCorrectDistanceEntreGraine: false,
-  isCorrectDistanceEntreRang: false,
-  isCorrectOccupationHauteur: false,
-  isCorrectOccupationSol: false,
-  isCorrectEspece: false,
-  isCorrectVariete: false,
+  isCorrectProtein: false,
+  isCorrectLipid: false,
+  isCorrectCarbohydrate: false,
+  isCorrectTGW: false,
+  isCorrectSowingDepth: false,
+  isCorrectSeedSpacing: false,
+  isCorrectRowSpacing: false,
+  isCorrectHeight: false,
+  isCorrectFloorSpace: false,
+  isCorrectSpecie: false,
+  isCorrectVariety: false,
   isCorrectCultivar: false,
   isCorrectName: false,
-  isCorrectRemarques: false,
+  isCorrectRemarks: false,
+  isCorrectIdFirebase: false,
 };
 
 export type NewVarietyStore = {
@@ -126,34 +143,34 @@ export const saveVariety = action(newVarietyStore, "saveVariety", (store) => {
   console.log("saveVariety");
 });
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-export const setInputString = action(
+export const setInput = action(
   newVarietyStore,
-  "setInputName",
-  (store, stringFiedl: TfieldString, value: string) => {
+  "setInput",
+  (store, fieldName: string, value: string) => {
     const { variety } = store.get();
-
-    const newInput = { ...variety, [stringFiedl]: value };
-    const checkField = "isCorrect" + firstCap(stringFiedl);
+    const newInput = { ...variety, [fieldName]: value };
+    const checkField = "isCorrect" + firstCap(fieldName);
 
     store.setKey("variety", newInput);
-    setIsInputStringCorrect(checkField, value);
+    setIsInputCorrect(checkField, value);
   }
 );
 
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const setInputNumber = action(
   newVarietyStore,
-  "setInputNumber",
-  (store, stringFiedl: TfieldNumber, value: number) => {
+  "setInput",
+  (store, fieldName: TfieldNumber, value: string) => {
     const { variety } = store.get();
+    const newInput = { ...variety, [fieldName]: parseInt(value) };
+    const checkField = "isCorrect" + firstCap(TfieldNumber[fieldName]);
 
-    const newInput = { ...variety, [stringFiedl]: value };
-    const checkField = "isCorrect" + firstCap(stringFiedl);
     store.setKey("variety", newInput);
-    setIsInputNumberCorrect(checkField, value);
+    setIsInputCorrect(checkField, value);
   }
 );
 
-export const setIsInputStringCorrect = action(
+export const setIsInputCorrect = action(
   newVarietyStore,
   "setIsInputStringCorrect",
   (store, field: string, value: string) => {
@@ -166,14 +183,3 @@ export const setIsInputStringCorrect = action(
   }
 );
 
-export const setIsInputNumberCorrect = action(
-  newVarietyStore,
-  "setIsInputNumberCorrect",
-  (store, field: string, value: number) => {
-    const { inputCorrect } = store.get();
-    if (value !== tempMin) {
-      const newInputCorrect = { ...inputCorrect, [field]: true };
-      store.setKey("inputCorrect", newInputCorrect);
-    }
-  }
-);

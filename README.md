@@ -65,10 +65,24 @@ npm install ckeditor4-react
 
 1. [choix technique](./doc/choixTechnique.md)
 
-[les designs sont fait sur figma](https://www.figma.com/file/A1Ix7uxonfjNDaqDJaDkjr/Jardin?node-id=0%3A1&t=DDHOCgCufe2RZp3m-0)
+1. [les designs sont fait sur figma](https://www.figma.com/file/A1Ix7uxonfjNDaqDJaDkjr/Jardin?node-id=0%3A1&t=DDHOCgCufe2RZp3m-0)
 
 ## Spécification
 
 1. [Ancien structure table](./doc/old-table_definition.md)
 1. [collection Seeds](./doc/definition-table-seed.md)
 1. [variete](./doc/variety.md)
+
+# hosting
+
+1. compiler le projet javascript
+
+```sh
+npm run build
+```
+
+1. deploiement
+
+```sh
+firebase deploy
+```

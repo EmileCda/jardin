@@ -40,7 +40,7 @@ export default function App() {
 <StrictMode>
       <BrowserRouter>
         <AppGlobalStyle />
-      <Header />
+        <Header />
           <Routes>
             <Route path="/" element={<Accueil />} />
             <Route path="/Needs" element={<Needs />} />
@@ -53,7 +53,6 @@ export default function App() {
             <Route path="/Variety" element={<Variety />} />
             <Route path="/Test" element={<Test />} />
           </Routes>
-
       </BrowserRouter>
     </StrictMode>
   )

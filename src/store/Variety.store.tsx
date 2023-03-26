@@ -7,74 +7,78 @@
 import { action, map } from "nanostores";
 import { TLang } from "../types/App.type";
 
+const MIN_TEMP : number  = -300;
 export type Tvariety = {
   idFirebase: string; // Id dans la table
   idVariety: number;
-  categorie: number; // voir categorie
-  rusticite: number; // temps en °c
-  tempGermMin: number; // temps en °c
-  tempGermMax: number; // temps en °c
-  dureeGermMin: number; // nb jour
-  dureeGermMax: number; // nb jour
-  zeroVeg: number; // temps en °c
-  tempCultMin: number; // temps en °c
-  tempCultMax: number; // temps en °c
-  dureeCultMin: number; // nb jour
-  dureeCultMax: number; // nb jour
-  rendementMin: number; // kg/plante
-  rendementMax: number; // kg/plante
-  calorie: number; // nb calorie/ gramme
-  proteide: number; // en pourcentage
-  lipide: number; // en pourcentage
-  glucide: number; // en pourcentage
-  poidsMilleGraine: number; // en gramme
-  profondeurSemis: number; // en mm
-  distanceEntreGraine: number; // en mm
-  occupationHauteur: number; // en mm
-  distanceEntreRang: number; // en mm
-  occupationSol: number; // en m2
-  Espece: string; // nom latin
-  variete: string; // nom latin
-  cultivar: string; // nom commun
-  name: string; // nom commun
-  remarques: string; // ; //}export type VarietyStore = {  name: string;
-};
+  category: number; // 
+  rusticity: number; // temps en °c
+  minGermTemp: number; // temps en °c
+  maxGermTemp: number; // temps en °c
+  minGermTime:  number; // nb jour
+  maxGermTime:  number; // nb jour
+  zeroVeg : number; // temp en °c
+  minGrowTemp: number; // temp en °c
+  maxGrowTemp: number; // temp en °c
+  minGrowTime: number; // temp en °c
+  maxGrowTime: number; // temp en °c
+  minYield: number; //  kg/plant 
+  maxYield: number; // kg/plant 
+  calorie: number; // nb calories  / gramme
+  protein: number; // % of calories
+  lipid: number; // % of calories
+  carbohydrate: number; // % of calories
+  tGW: number; // thousand grain weight
+  sowingDepth: number; // depth in mm 
+  seedSpacing: number; // in mm 
+  rowSpacing: number; // in mm 
+  height: number; // in mm 
+  floorSpace: number; // square m
+  gender: string; // latin name 
+  specie: string; // latin name 
+  variety: string; // latin name 
+  cultivar : string; // local name 
+  name: string; //  common name 
+  remarks: string; // free text 
+
+}
 
 const texte = "mon texte";
 console.log(typeof texte);
 
 
 export const  varietyInit : Tvariety= {
-  idFirebase: "" , // Id dans la table
-  idVariety: -300,
-  categorie: -300, // voir categorie
-  rusticite: -300, // temps en °c
-  tempGermMin: -300, // temps en °c
-  tempGermMax: -300, // temps en °c
-  dureeGermMin: -300, // nb jour
-  dureeGermMax: -300, // nb jour
-  zeroVeg: -300, // temps en °c
-  tempCultMin: -300, // temps en °c
-  tempCultMax: -300, // temps en °c
-  dureeCultMin: -300, // nb jour
-  dureeCultMax: -300, // nb jour
-  rendementMin: -300, // kg/plante
-  rendementMax: -300, // kg/plante
-  calorie: -300, // nb calorie/ gramme
-  proteide: -300, // en pourcentage
-  lipide: -300, // en pourcentage
-  glucide: -300, // en pourcentage
-  poidsMilleGraine: -300, // en gramme
-  profondeurSemis: -300, // en mm
-  distanceEntreGraine: -300, // en mm
-  distanceEntreRang: -300, // en mm
-  occupationHauteur: -300, // en mm
-  occupationSol: -300, // en m2
-  Espece: "", // nom latin
-  variete: "", // nom latin
-  cultivar: "", // nom commun
-  name: "", // nom commun
-  remarques: "", // ; //}exp
+  idFirebase: "", // Id dans la table
+  idVariety: MIN_TEMP,
+  category: MIN_TEMP, // 
+  rusticity: MIN_TEMP, // temps en °c
+  minGermTemp: MIN_TEMP, // temps en °c
+  maxGermTemp: MIN_TEMP, // temps en °c
+  minGermTime:  MIN_TEMP, // nb jour
+  maxGermTime:  MIN_TEMP, // nb jour
+  zeroVeg : MIN_TEMP, // temp en °c
+  minGrowTemp: MIN_TEMP, // temp en °c
+  maxGrowTemp: MIN_TEMP, // temp en °c
+  minGrowTime: MIN_TEMP, // temp en °c
+  maxGrowTime: MIN_TEMP, // temp en °c
+  minYield: MIN_TEMP, //  kg/plant 
+  maxYield: MIN_TEMP, // kg/plant 
+  calorie: MIN_TEMP, // nb calories  / gramme
+  protein: MIN_TEMP, // % of calories
+  lipid: MIN_TEMP, // % of calories
+  carbohydrate: MIN_TEMP, // % of calories
+  tGW: MIN_TEMP, // thousand grain weight
+  sowingDepth: MIN_TEMP, // depth in mm 
+  seedSpacing: MIN_TEMP, // in mm 
+  rowSpacing: MIN_TEMP, // in mm 
+  height: MIN_TEMP, // in mm 
+  floorSpace: MIN_TEMP, // square m
+  gender: "", // latin name 
+  specie: "", // latin name 
+  variety: "", // latin name 
+  cultivar : "", // local name 
+  name: "", //  common name 
+  remarks: "", // free text 
 }
 
 export type VarietyStore = {
