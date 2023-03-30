@@ -11,6 +11,7 @@ import {
 import { action, map } from "nanostores";
 import { firebaseDb } from "../lib/Firebase";
 import { firstCap } from "../lib/utils";
+import { Tvariety } from "./Variety.store";
 
 // defined  here ./doc/definition-table-seed.md
 
@@ -36,6 +37,8 @@ export const seedInit: Tseed = {
   seedType: 0,
   idFirebase: "",
   isValide: true,
+  varietyList : [],
+
 };
 
 export type Tseed = {
@@ -49,6 +52,7 @@ export type Tseed = {
   seedType: number;
   idFirebase: string;
   isValide: boolean;
+  varietyList : Tvariety[];
 };
 
 export type TseedCorrect = {
@@ -137,6 +141,15 @@ export const removeSeed = action(
   }
 );
 
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const updateVarietyList = action(
+  newSeedStore,
+  "updateVarietyList",
+  (store, idSeed:string , varietyList: Tvariety[]) => {
+  
+  
+  });
+  
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const updateSeed = action(
   newSeedStore,
@@ -298,6 +311,8 @@ export const checkSeed = action(newSeedStore, "checkSeed", (store) => {
       seedType: input.seedType,
       idFirebase: input.idFirebase,
       isValide: true,
+      varietyList : input.varietyList,
+
     };
 
     store.setKey("newSeed", newSeed);

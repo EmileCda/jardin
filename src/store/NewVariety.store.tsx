@@ -8,22 +8,15 @@ import { action, map } from "nanostores";
 import { firstCap } from "../lib/utils";
 import { TLang } from "../types/App.type";
 import { tempMin } from "./NewSeed.store";
-import { Tvariety, varietyInit } from "./Variety.store";
-
-export enum PrintMedia {
-  Newspaper,
-  Newsletter,
-  Magazine,
-  Book,
-}
+import { addVariety, Tvariety, varietyInit } from "./Variety.store";
 
 export enum TfieldString {
-  specie,
-  variety,
-  cultivar,
-  name,
-  remarks,
-  idFirebase,
+  specie = "specie",
+  variety = "variety",
+  cultivar = "cultivar",
+  name = "name",
+  remarks = "remarks",
+  idFirebase = "idFirebase",
 }
 
 
@@ -139,8 +132,11 @@ export const newVarietyStore = map<NewVarietyStore>({
 });
 
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-export const saveVariety = action(newVarietyStore, "saveVariety", (store) => {
-  console.log("saveVariety");
+export const saveNewVarity = action(newVarietyStore, "saveVariety", (store) => {
+
+  const {variety} = store.get();
+  addVariety (variety);
+  console.log("saveNewVarity");
 });
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const setInput = action(
@@ -155,7 +151,22 @@ export const setInput = action(
     setIsInputCorrect(checkField, value);
   }
 );
-
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const setSeedType = action(
+  newVarietyStore,
+  "setSeedType",
+  (store, isSet:boolean, id: number) => {
+    
+    const {variety}=store.get();
+    const modId = isSet ? id : -id ;
+    console.log(modId);
+    console.log(variety.seedType);
+    const newSSeedType = variety.seedType + modId ;
+    const newCurrentVariety = {...variety,seedType:newSSeedType};
+    console.log(newSSeedType);
+    store.setKey("variety", newCurrentVariety);
+  }
+);
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const setInputNumber = action(
   newVarietyStore,

@@ -8,9 +8,7 @@ import { textScreen } from "../lib/utils";
 import { newSeedStore, Tseed } from "../store/NewSeed.store";
 import { SeedStore } from "../store/Seed.store";
 import {
-  saveVariety,
   setIdCurrentVariety,
-  setName,
   Tvariety,
   varietyStore,
 } from "../store/Variety.store";

@@ -3,9 +3,9 @@ import { useMediaQuery } from "react-responsive";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppGlobalStyle } from "../style/App.style";
 import About from "./About";
-import Accueil from "./Accueil";
 import Calendar from "./Calendar";
 import Header from "./Header";
+import Home from "./Home";
 import Needs from "./Needs";
 import NewSeed from "./NewSeed";
 import NewVariety from "./NewVariety";
@@ -15,7 +15,6 @@ import Tomate from "./Tomate";
 import Variety from "./Variety";
 
 export default function App() {
-
   const isMobileDevice = useMediaQuery({
     query: "(min-device-width: 480px)",
   });
@@ -37,24 +36,23 @@ export default function App() {
   });
 
   return (
-<StrictMode>
+    <StrictMode>
       <BrowserRouter>
+      <Header />
         <AppGlobalStyle />
-        <Header />
-          <Routes>
-            <Route path="/" element={<Accueil />} />
-            <Route path="/Needs" element={<Needs />} />
-            <Route path="/Seeds" element={<Seeds />} />
-            <Route path="/NewSeed" element={<NewSeed />} />
-            <Route path="/Calendar" element={<Calendar />} />
-            <Route path="/About" element={<About />} />
-            <Route path="/NewVariety" element={<NewVariety />} />
-            <Route path="/Tomate" element={<Tomate />} />
-            <Route path="/Variety" element={<Variety />} />
-            <Route path="/Test" element={<Test />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Needs" element={<Needs />} />
+          <Route path="/Seeds" element={<Seeds />} />
+          <Route path="/NewSeed" element={<NewSeed />} />
+          <Route path="/Calendar" element={<Calendar />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/NewVariety" element={<NewVariety />} />
+          <Route path="/Tomate" element={<Tomate />} />
+          <Route path="/Variety" element={<Variety />} />
+          <Route path="/Test" element={<Test />} />
+        </Routes>
       </BrowserRouter>
     </StrictMode>
-  )
+  );
 }
-

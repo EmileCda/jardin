@@ -1,7 +1,6 @@
 import { useStore } from "@nanostores/react";
 import { Link } from "react-router-dom";
 import { textScreen } from "../lib/utils";
-import { headerStore } from "../store/Header.store";
 import { loadSeedList, newSeedStore, Tseed } from "../store/NewSeed.store";
 import { setIdCurrentSeed } from "../store/Seed.store";
 import { MyLink, Title } from "../style/Common.style";

@@ -14,8 +14,6 @@ export const HeaderContainer = styled.div`
   left: 0;
   right: 0;
   padding: 0px 10px;
-  z-index: -1;
-
 `;
 
 export const Logo = styled.div`
@@ -62,7 +60,7 @@ export const MenuBuger = styled.div`
 
 export const MenuNavContainer = styled.div<{ isClicked: boolean }>`
   position: absolute;
-  z-index: -1;
+  /* z-index: -1; */
   min-width: 100vw;
   top: 100px;
   margin-left: ${(props) => (props.isClicked ? "0%" : "200%")};

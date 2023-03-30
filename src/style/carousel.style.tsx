@@ -16,6 +16,8 @@ const fade = keyframes`
 
 export const Slide = styled.li<{display:boolean}>`
   display: ${(props) => (props.display ? "flex" : "none")};
+  justify-content: center;
+
   animation: ${fade} 3s;
   list-style: none;
   margin: 0;
@@ -23,7 +25,6 @@ export const Slide = styled.li<{display:boolean}>`
   padding:0 1rem;
   align-items: center;
   img{
-    z-index: -1;
     max-width: 100vw;
     padding: 0 0.6rem;
     margin: 0;

@@ -3,24 +3,40 @@
 
   "carousel": {
     "images": [
-      { "name":"bar-café.jpg","caption" :"un bar qui fait du café dans une ambiance flou"}, 
-      { "name":"landscape.jpg","caption" :"un paysage de campagne "},
-      { "name":"morse.jpg","caption" :"Un morse avec d'autre morse en noir et blanc"},
-      { "name":"phare.jpg","caption" :"le phare du bout du monde"},
-      { "name":"stone.jpg","caption" :"stone edge ou son cousin "},
-      { "name":"peche_au_gros.jpg","caption" :"la peche au gros a carry le rouet"},
-      { "name":"vacances-famille.jpg","caption" :"Famille en vacance sur la plage "}
-  ],
+      {
+        "name": "bar-café.jpg",
+        "caption": "un bar qui fait du café dans une ambiance flou"
+      },
+      { "name": "landscape.jpg", "caption": "un paysage de campagne " },
+      {
+        "name": "morse.jpg",
+        "caption": "Un morse avec d'autre morse en noir et blanc"
+      },
+      { "name": "phare.jpg", "caption": "le phare du bout du monde" },
+      { "name": "stone.jpg", "caption": "stone edge ou son cousin " },
+      {
+        "name": "peche_au_gros.jpg",
+        "caption": "la peche au gros a carry le rouet"
+      },
+      {
+        "name": "vacances-famille.jpg",
+        "caption": "Famille en vacance sur la plage "
+      }
+    ],
     "timer": 4000
-  }, "Kar": {
+  },
+  "Kar": {
     "images": [
-        { "name":"bar-café.jpg","caption" :"text bar-café"},
-        { "name":"landscape.jpg","caption" :"text landscape"},
-        { "name":"morse.jpg","caption" :"text morse"},
-        { "name":"phare.jpg","caption" :"text phare"},
-        { "name":"stone.jpg","caption" :"text stone"},
-        { "name":"peche_au_gros.jpg","caption" :"text peche_au_gros"},
-        { "name":"vacances-famille.jpg","caption" :"text landvacances-famillescape"}
+      { "name": "bar-café.jpg", "caption": "text bar-café" },
+      { "name": "landscape.jpg", "caption": "text landscape" },
+      { "name": "morse.jpg", "caption": "text morse" },
+      { "name": "phare.jpg", "caption": "text phare" },
+      { "name": "stone.jpg", "caption": "text stone" },
+      { "name": "peche_au_gros.jpg", "caption": "text peche_au_gros" },
+      {
+        "name": "vacances-famille.jpg",
+        "caption": "text landvacances-famillescape"
+      }
     ],
     "timer": 4000
   },
@@ -51,67 +67,67 @@
       "fr": "Accueil",
       "en": "Home",
       "es": "Inicio",
-      "link": "./"
+      "link": "/"
     },
     {
       "fr": "Besoin",
       "en": "Needs",
       "es": "Necesidades",
-      "link": "./Needs"
+      "link": "/Needs"
     },
     {
       "fr": "Graine",
       "en": "Seeds",
       "es": "Semillas",
-      "link": "./Seeds"
+      "link": "/Seeds"
     },
     {
       "fr": "Itinéraire",
       "en": "itinary",
       "es": "itinerario",
-      "link": "./itinary"
+      "link": "/Itinary"
     },
     {
       "fr": "Planche",
       "en": "Planting bed",
       "es": "Lecho de siembra",
-      "link": "./PlantingBed"
+      "link": "/PlantingBed"
     },
     {
       "fr": "Tâches",
       "en": "Tasks",
       "es": "Tareas",
-      "link": "./Task"
+      "link": "/Task"
     },
     {
       "fr": "Suivi",
       "en": "Monitoring",
       "es": "Monitorización",
-      "link": "./Monitoring"
+      "link": "/Monitoring"
     },
     {
       "fr": "Calendrier",
       "en": "Calendar",
       "es": "Calendario",
-      "link": "./Calendar"
+      "link": "/Calendar"
     },
     {
       "fr": "Contact",
       "en": "Contact",
       "es": "Contacto",
-      "link": "./Contact"
+      "link": "/Contact"
     },
     {
       "fr": "A propos",
       "en": "About",
       "es": "Acerca de",
-      "link": "./About"
+      "link": "/About"
     },
     {
       "fr": "Test",
       "en": "Test",
       "es": "Prueba",
-      "link": "./Test"
+      "link": "/Test"
     },
     {
       "fr": "Variétée",
@@ -120,6 +136,15 @@
       "link": "./Variety"
     }
   ],
+  "screenHome": [
+    {
+      "key": "screenName",
+      "fr": "Accueil",
+      "en": "Home",
+      "es": "[es] Home]"
+    }
+  ],
+
   "screenSeeds": [
     {
       "key": "screenName",
@@ -356,7 +381,6 @@
       "en": "rusticity",
       "es": "[es] rusticity"
     }
-
   ],
   "screenVariety": [
     {
@@ -371,16 +395,13 @@
       "en": "Add new Variety",
       "es": "Añadir nueva variedad"
     }
-
-
-    
   ],
 
-  "seedType": {
-    "vegetable": 1,
-    "aromatic": 2,
-    "medicinal": 4,
-    "flower": 8,
-    "perennial": 16
-  }
+  "seedType": [
+    { "name" : "vegetable", "value": 1 },
+    { "name" : "aromatic","value": 2 },
+    { "name" : "medicinal","value": 4 },
+    { "name" : "flower","value": 8 },
+    { "name" : "perennial","value": 16 }
+  ]
 }

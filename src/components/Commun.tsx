@@ -10,7 +10,6 @@ export type TheaderScreenProps = {
 export function HeaderScreen(headerParam: TheaderScreenProps) {
     return (
       <>
-        {" "}
         <ScreenHeader>
           <IconContainer>
             <Link to={headerParam.link}>

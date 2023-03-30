@@ -22,6 +22,11 @@ export const NewVarietyContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   background-color: ${AppTheme.colors.background};
+  ul{
+    list-style: none;
+    text-decoration: none;
+    padding: 0;
+  }
 `;
 
 export const VarietyItem = styled.div`
@@ -44,6 +49,9 @@ margin: 0 0 .3rem 0;
 padding: .2rem;
 background-color: ${AppTheme.colors.lessBG}; ;
 border-bottom : 1px solid black;
+input{
+  width: 10rem;
+} 
 `;
 
 export const InputGroup2Label = styled.div`
@@ -56,16 +64,23 @@ h1{
 
 
 
-export const InputGroup2Input = styled.div`
+export const InputGroup = styled.div`
 display: flex;
 justify-content: center;
 
-input{
-  max-width: 40%;
-  min-height: 1.2rem;
-
-}
-
 `;
 
+export const InputGroup3Container = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+margin: 0 0 .3rem 0;
+padding: .2rem;
+background-color: ${AppTheme.colors.lessBG}; ;
+border-bottom : 1px solid black;
+input{
+  width: 7rem;
+} 
+`;
 

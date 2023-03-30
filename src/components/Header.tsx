@@ -1,10 +1,9 @@
 import { useStore } from "@nanostores/react";
-import { Link } from "react-router-dom";
 import fr from "./../images/fr.png";
 import en from "./../images/en.png";
 import es from "./../images/es.png";
 
-const tabFlag = [fr,es,en,]
+const tabFlag = [fr, es, en];
 import {
   headerStore,
   setLang,
@@ -19,6 +18,10 @@ import {
 } from "../style/Header.style";
 import { JsonLink, TLang } from "../types/App.type";
 import jsonData from "./../data/localData.json";
+import { MyLink } from "../style/Common.style";
+import { Link } from "react-router-dom";
+import { CursorPointer } from "../style/About.style";
+
 export const localData: any = jsonData;
 
 /**
@@ -44,7 +47,6 @@ export function LanguageBar() {
           className={lang === item.id ? "hide" : ""}
           key={index}
           src={tabFlag[index]}
-          // src={fr}
           alt={item.description}
           onClick={() => setLang(item.id)}
         />
@@ -52,8 +54,6 @@ export function LanguageBar() {
     </LanguageBarContainer>
   );
 }
-
-
 
 export function MenuNav() {
   const navBar = localData.navBar;
