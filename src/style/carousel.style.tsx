@@ -14,8 +14,8 @@ const fade = keyframes`
   to {opacity: 1}
 `;
 
-export const Slide = styled.li<{display:boolean}>`
-  display: ${(props) => (props.display ? "flex" : "none")};
+export const Slide = styled.li<{isVisible:boolean}>`
+  display: ${(props) => (props.isVisible ? "flex" : "none")};
   justify-content: center;
 
   animation: ${fade} 3s;

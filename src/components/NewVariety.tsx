@@ -105,10 +105,8 @@ export function SeedType() {
                   name={item.name}
                   value={item.value}
                   onChange={(e) => setSeedType(e.target.checked, item.value)}
-                  // onChange={(e) => console.log(e.target.checked)}
                 />
                 {item.name}
-                {"--"}
               </label>
             </li>
           )
@@ -155,7 +153,6 @@ export default function NewVariety() {
   const myTextScreen = textScreen("NewVariety");
   const { variety } = useStore(newVarietyStore);
   const seedTypeList = localData.seedType;
-  console.log(seedTypeList);
   return (
     <>
       <NewVarietyContainer>

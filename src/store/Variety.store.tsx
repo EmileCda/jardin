@@ -7,8 +7,11 @@
 import { action, map } from "nanostores";
 import { TLang } from "../types/App.type";
 import { updateVarietyList } from "./NewSeed.store";
+import { setVariety } from "./NewVariety.store";
 
 export const MIN_TEMP: number = -300;
+export const ID_INIT: number = -1;
+
 export type Tvariety = {
   idFirebase: string; // Id dans la table
   idVariety: number;
@@ -44,10 +47,9 @@ export type Tvariety = {
   remarks: string; // free text
 };
 
-
 export const varietyInit: Tvariety = {
   idFirebase: "", // Id dans la table
-  idVariety: MIN_TEMP,
+  idVariety: ID_INIT,
   seedType: 0,
   category: MIN_TEMP, //
   rusticity: MIN_TEMP, // temps en °c
@@ -85,36 +87,59 @@ export type VarietyStore = {
   isBusy: boolean;
   currentId: number;
   currentVariety: Tvariety;
-  idSeed : string;
+  idSeed: string;
   varietyList: Tvariety[];
 };
 
 export const varietyStore = map<VarietyStore>({
   name: "",
-  idSeed :"",
+  idSeed: "",
   isBusy: false,
-  currentId: -1,
+  currentId: ID_INIT,
   currentVariety: { ...varietyInit },
   varietyList: [],
 });
 
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const addNewVariety = action(
+  varietyStore,
+  "addNewVariety",
+  (store) => {
+    console.log("addNewVariety");
+    store.setKey("currentVariety", varietyInit);
+    store.setKey("currentId", ID_INIT);
+    // save();
+  }
+);
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const addVariety = action(
   varietyStore,
   "addVariety",
-  (store, newVariety) => {
+  (store, newVariety: Tvariety) => {
     const { varietyList } = store.get();
-    const newVarietyList = {...newVariety,newVariety};
-    store.setKey("varietyList",newVarietyList);
-    store.setKey("currentVariety",newVariety);
-    save();
+    if (newVariety.idVariety ===ID_INIT){
+      newVariety.idVariety = varietyList.length;
+      const newVarietyList = [newVariety, ...varietyList];
+      store.setKey("varietyList", newVarietyList);
+    } else{
+
+      const newVarietyList  = varietyList.map((item : Tvariety, index : number)=>{
+        if( item.idVariety ===newVariety.idVariety)
+          return newVariety;
+        else
+          return item;
+      })
+      store.setKey("varietyList", newVarietyList);
+
+    }
+    store.setKey("currentVariety", newVariety);
+    // save();
   }
 );
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const save = action(varietyStore, "save", (store) => {
-
-  const { varietyList,idSeed } = store.get();
-  updateVarietyList( idSeed,varietyList);
+  const { varietyList, idSeed } = store.get();
+  updateVarietyList(idSeed, varietyList);
 });
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const setIdCurrentVariety = action(
@@ -122,6 +147,10 @@ export const setIdCurrentVariety = action(
   "setIdCurrentVariety",
   (store, id: number) => {
     store.setKey("currentId", id);
+    const { varietyList } = store.get();
+    const currentVariety = varietyList[id];
+    store.setKey("currentVariety", currentVariety);
+    setVariety(currentVariety);
   }
 );
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+

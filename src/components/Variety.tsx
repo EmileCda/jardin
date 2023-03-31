@@ -8,6 +8,7 @@ import { textScreen } from "../lib/utils";
 import { newSeedStore, Tseed } from "../store/NewSeed.store";
 import { SeedStore } from "../store/Seed.store";
 import {
+  addNewVariety,
   setIdCurrentVariety,
   Tvariety,
   varietyStore,
@@ -25,8 +26,8 @@ export type DisplayVarietyProps = {
 export function DisplayVariety({ item, index }: DisplayVarietyProps) {
   return (
     <>
-      <MyLink to="/ModVariety">
-        <VarietyItem key={index} onClick={() => setIdCurrentVariety(index)}>
+      <MyLink to="/NewVariety">
+        <VarietyItem key={index} onClick={() => setIdCurrentVariety(item.idVariety)}>
           <Title>{item.name}</Title>
           <SeedId>{item.idFirebase}</SeedId>
         </VarietyItem>
@@ -39,7 +40,7 @@ export default function Variety() {
   const myTextScreen = textScreen("Variety");
   const { idCurrentSeed } = useStore(SeedStore);
   const { seedList } = useStore(newSeedStore);
-  const { name, varietyList } = useStore(varietyStore);
+  const {  varietyList } = useStore(varietyStore);
   const mySeed: Tseed[] = seedList.filter(
     (item: Tseed) => item.idFirebase === idCurrentSeed
   );
@@ -61,7 +62,7 @@ export default function Variety() {
 
       {/* <input type="text" value={name} onChange={(event) =>setName(event.currentTarget.value)}/> */}
       <Link to="/NewVariety">
-        <button >{myTextScreen.addVariety} </button>
+        <button onClick={addNewVariety}>{myTextScreen.addVariety} </button>
       </Link>
     </>
   );

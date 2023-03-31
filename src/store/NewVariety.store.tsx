@@ -132,6 +132,12 @@ export const newVarietyStore = map<NewVarietyStore>({
 });
 
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const setVariety = action(newVarietyStore, "setVarity", (store,variety:Tvariety) => {
+
+  store.setKey("variety", variety);
+
+});
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const saveNewVarity = action(newVarietyStore, "saveVariety", (store) => {
 
   const {variety} = store.get();

@@ -77,7 +77,7 @@ export default function Carousel() {
     <>
       <SlideContainer>
         {imgList.map((url: TSlide, index: number) => (
-          <Slide key={index} display={index === displayIndex}>
+          <Slide key={index} isVisible={index === displayIndex}>
             <img
               src={url.name ? url.name : "Empty seat"}
               alt={`image n° ${index}`}
