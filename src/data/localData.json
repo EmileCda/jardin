@@ -271,8 +271,16 @@
       "key": "saveVariety",
       "fr": "Sauvegarder",
       "en": "Save",
-      "es": "[es]Save"
+      "es": "Guardar"
     },
+    {
+      "key": "updateVariety",
+      "fr": "Miseà jour",
+      "en": "Update",
+      "es": "Actualizar"
+    },
+
+    
     {
       "key": "nameLabel",
       "fr": "Nom de la variété",
@@ -300,87 +308,118 @@
     {
       "key": "germTime",
       "fr": "Durée de germination",
-      "en": "Germination duration",
-      "es": "Duración de la germinación"
+      "en": "Germination time",
+      "es": "Tiempo de la germinación"
     },
     {
       "key": "minGermTime",
       "fr": "Durée germ min",
-      "en": "min germ duration",
-      "es": "[es] duree germ min"
+      "en": "min germ time",
+      "es": "Tiempo mínima de germinación"
     },
     {
       "key": "maxGermTime",
       "fr": "Durée germ max",
-      "en": "max germ duration",
-      "es": "[es] duree germ max"
+      "en": "max germ duratimetion",
+      "es": "Tiempo máximo de germinación"
     },
     {
       "key": "growTemp",
       "fr": "Température de culture",
-      "en": "germ temp",
-      "es": "[es] germ temp"
+      "en": "cult temp",
+      "es": "temperatura de culto"
     },
     {
       "key": "minGrowTemp",
       "fr": "température culture min",
       "en": "min cult temp",
-      "es": "[es] min cult temp"
+      "es": "temperatura mínima de culto"
     },
     {
       "key": "maxGrowTemp",
       "fr": "Température germ max",
       "en": "max cult temp",
-      "es": "[es] max cult temp"
+      "es": "temperatura máxima de culto"
     },
     {
       "key": "growTime",
       "fr": "durée de culture",
       "en": "grow time",
-      "es": "[es] grow time"
+      "es": "tiempo de culto"
     },
     {
       "key": "minGrowTime",
       "fr": "durée culture min",
       "en": "min grow temp",
-      "es": "[es] min grow temp"
+      "es": "tiempo mínimo de culto"
     },
     {
       "key": "maxGrowTime",
       "fr": "Température culture max",
       "en": "max cult time",
-      "es": "[es] max cult time"
+      "es": "tiempo máximo de culto"
     },
     {
       "key": "yield",
       "fr": "rendement",
       "en": "yield",
-      "es": "[es] yield"
+      "es": "rendimiento"
     },
     {
       "key": "minYield",
       "fr": "rendement min",
       "en": "min yield",
-      "es": "[es] min yield"
+      "es": "rendimiento mínimo"
     },
     {
       "key": "maxYield",
       "fr": "rendement max",
       "en": "max yield",
-      "es": "[es] max yield"
+      "es": "rendimiento máximo"
     },
     {
       "key": "zeroVeg",
       "fr": "Zéro vegetation",
       "en": "Zero vegetation",
-      "es": "[es] Zero vegetation"
+      "es": "Cero vegetación"
     },
     {
       "key": "rusticity",
       "fr": "rusticité ",
       "en": "rusticity",
-      "es": "[es] rusticity"
+      "es": "rusticidad"
+    },
+    {
+      "key": "calorieGramme",
+      "fr": "calorie / gramme ",
+      "en": "Calories per Gram",
+      "es": "calorías por gramo"
+    },
+    {
+      "key": "seedName",
+      "fr": "Nom de la graine",
+      "en": "seedName",
+      "es": "Nombre de la semilla"
+    },
+    {
+      "key": "gender",
+      "fr": "Genre",
+      "en": "Gender",
+      "es": "género"
+    },
+    {
+      "key": "species",
+      "fr": "espèce",
+      "en": "species",
+      "es": "especies"
+    },
+    {
+      "key": "Generic",
+      "fr": "Générique",
+      "en": "Generic",
+      "es": "Genérico"
     }
+    
   ],
   "screenVariety": [
     {
@@ -390,7 +429,7 @@
       "es": "Variedad"
     },
     {
-      "key": "addVariety",
+      "key": "newVariety",
       "fr": "Ajouter une nouvelle variété",
       "en": "Add new Variety",
       "es": "Añadir nueva variedad"

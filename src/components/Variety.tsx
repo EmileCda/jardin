@@ -8,28 +8,28 @@ import { textScreen } from "../lib/utils";
 import { newSeedStore, Tseed } from "../store/NewSeed.store";
 import { SeedStore } from "../store/Seed.store";
 import {
-  addNewVariety,
+  newVariety,
   setIdCurrentVariety,
   Tvariety,
   varietyStore,
 } from "../store/Variety.store";
 import { MyLink, Title } from "../style/Common.style";
 import { SeedId } from "../style/Seeds.style";
-import { VarietyItem, VarietyMainContainer } from "../style/Variety.style";
+import { VarietyContainer, VarietyItem, VarietyMainContainer } from "../style/Variety.style";
+import { HeaderScreen } from "./Common";
 
 export type DisplayVarietyProps = {
   item: Tvariety;
-  index: number;
+  key: number;
 };
 
 // -----------------------------------------------------------------------
-export function DisplayVariety({ item, index }: DisplayVarietyProps) {
+export function DisplayVariety({ item, key }: DisplayVarietyProps) {
   return (
     <>
       <MyLink to="/NewVariety">
-        <VarietyItem key={index} onClick={() => setIdCurrentVariety(item.idVariety)}>
-          <Title>{item.name}</Title>
-          <SeedId>{item.idFirebase}</SeedId>
+        <VarietyItem key={key} onClick={() => setIdCurrentVariety(item.idVariety)}>
+          <Title>{item.varietyName}</Title>
         </VarietyItem>
       </MyLink>
     </>
@@ -38,32 +38,33 @@ export function DisplayVariety({ item, index }: DisplayVarietyProps) {
 
 export default function Variety() {
   const myTextScreen = textScreen("Variety");
-  const { idCurrentSeed } = useStore(SeedStore);
-  const { seedList } = useStore(newSeedStore);
+  const { currentSeed } = useStore(SeedStore);
   const {  varietyList } = useStore(varietyStore);
-  const mySeed: Tseed[] = seedList.filter(
-    (item: Tseed) => item.idFirebase === idCurrentSeed
-  );
+  
 
   // -----------------------------------------------------------------------
 
   return (
     <>
-      <Link to="/Seeds">
-        <i className="fa-solid fa-chevron-left"></i>
-      </Link>
-      <h1>{myTextScreen.screenName}</h1>
-
+    <VarietyContainer>
+    <HeaderScreen
+          link="/Seeds"
+          icon="fa-solid fa-chevron-left"
+          title={myTextScreen.screenName}
+          info={`${"tomate : Genre-espèce"}`}
+        />
+      
       <VarietyMainContainer>
         {varietyList.map((item: Tvariety, index: number) => (
-          <DisplayVariety item={item} index={index} />
+          <DisplayVariety item={item} key={index} />
         ))}
       </VarietyMainContainer>
 
       {/* <input type="text" value={name} onChange={(event) =>setName(event.currentTarget.value)}/> */}
       <Link to="/NewVariety">
-        <button onClick={addNewVariety}>{myTextScreen.addVariety} </button>
+        <button onClick={newVariety}>{myTextScreen.newVariety} </button>
       </Link>
+      </VarietyContainer>
     </>
   );
 }

@@ -2,7 +2,7 @@ import { useStore } from "@nanostores/react";
 import { Link } from "react-router-dom";
 import { textScreen } from "../lib/utils";
 import { loadSeedList, newSeedStore, Tseed } from "../store/NewSeed.store";
-import { setIdCurrentSeed } from "../store/Seed.store";
+import { newSeed, setIdCurrentSeed, } from "../store/Seed.store";
 import { MyLink, Title } from "../style/Common.style";
 import {  Seed, SeedId, SeedMainContainer } from "../style/Seeds.style";
 
@@ -45,8 +45,8 @@ export default function Seeds() {
         ))}
       </SeedMainContainer>
 
-      <Link to="/NewSeed">
-        <button>{myTextScreen.newSeed}</button>
+      <Link to="/NewVariety">
+        <button onClick={newSeed}>{myTextScreen.newSeed}</button>
       </Link>
     </>
   );

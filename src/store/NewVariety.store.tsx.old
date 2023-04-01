@@ -8,7 +8,7 @@ import { action, map } from "nanostores";
 import { firstCap } from "../lib/utils";
 import { TLang } from "../types/App.type";
 import { tempMin } from "./NewSeed.store";
-import { addVariety, Tvariety, varietyInit } from "./Variety.store";
+import { ID_INIT, Tvariety, newVariety, varietyInit } from "./Variety.store";
 
 export enum TfieldString {
   specie = "specie",
@@ -123,26 +123,23 @@ const inputInit: TnewVarietyInputCorrect = {
 export type NewVarietyStore = {
   isBusy: boolean;
   inputCorrect: TnewVarietyInputCorrect;
+  idVariety: number,
   variety: Tvariety;
 };
 export const newVarietyStore = map<NewVarietyStore>({
   isBusy: false,
   inputCorrect: { ...inputInit },
+  idVariety: ID_INIT,
   variety: { ...varietyInit },
 });
 
-// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-export const setVariety = action(newVarietyStore, "setVarity", (store,variety:Tvariety) => {
 
-  store.setKey("variety", variety);
-
-});
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-export const saveNewVarity = action(newVarietyStore, "saveVariety", (store) => {
+export const saveVariety = action(newVarietyStore, "saveVariety", (store) => {
 
   const {variety} = store.get();
-  addVariety (variety);
-  console.log("saveNewVarity");
+  newVariety ();
+  console.log("saveVariety");
 });
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const setInput = action(

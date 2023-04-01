@@ -71,7 +71,7 @@ export type TnewSeedStore = {
   inputCorrect: TseedCorrect;
   isBusy: boolean;
   isSeedCorrect: boolean;
-  newSeed: Tseed;
+  currentSeed: Tseed;
   seedList: Tseed[];
   isLoaded:  boolean;
 };
@@ -92,7 +92,7 @@ export const newSeedStore = map<TnewSeedStore>({
   isBusy: false,
   isSeedCorrect: false,
   isLoaded: false,
-  newSeed: { ...seedInit },
+  currentSeed: { ...seedInit },
   seedList: [],
 });
 
@@ -106,8 +106,8 @@ export const addSeed = action(newSeedStore, "addSeed", (store) => {
   const { isSeedCorrect } = store.get();
   if (isSeedCorrect) {
     addCurrentSeed();
-    const { newSeed, seedList } = store.get();
-    const newSeedList = { ...seedList, ...newSeed };
+    const { currentSeed, seedList } = store.get();
+    const newSeedList = { ...seedList, ...currentSeed };
     store.setKey("seedList", newSeedList);
     {console.log(newSeedList)}
   }
@@ -315,7 +315,7 @@ export const checkSeed = action(newSeedStore, "checkSeed", (store) => {
 
     };
 
-    store.setKey("newSeed", newSeed);
+    store.setKey("currentSeed", newSeed);
     store.setKey("isSeedCorrect", true);
     return true;
   }
@@ -328,11 +328,11 @@ export const saveCurrentSeed = action(
   "saveSeed",
   async (store) => {
     store.setKey("isBusy", true);
-    const { newSeed } = store.get();
+    const { currentSeed } = store.get();
 
     const mySeedCollection = collection(firebaseDb, seedCollection);
-    const myDoc = doc(mySeedCollection, newSeed.idFirebase);
-    const status = await setDoc(myDoc, newSeed);
+    const myDoc = doc(mySeedCollection, currentSeed.idFirebase);
+    const status = await setDoc(myDoc, currentSeed);
     store.setKey("isBusy", false);
   }
 );
@@ -342,13 +342,13 @@ export const addCurrentSeed = action(
   "saveSeed",
   async (store) => {
     store.setKey("isBusy", true);
-    const { newSeed } = store.get();
+    const { currentSeed } = store.get();
 
     const mySeedCollection = collection(firebaseDb, seedCollection);
-    const status = await addDoc(mySeedCollection, newSeed);
-    const newNewSeed = { ...newSeed, idFirebase: status.id };
+    const status = await addDoc(mySeedCollection, currentSeed);
+    const newNewSeed = { ...currentSeed, idFirebase: status.id };
 
-    store.setKey("newSeed", newNewSeed);
+    store.setKey("currentSeed", newNewSeed);
     store.setKey("isBusy", false);
   }
 );

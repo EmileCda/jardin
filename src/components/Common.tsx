@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { IconContainer, ScreenHeader, TextContainer } from "../style/Common.style";
+import { IconContainer, ScreenHeader, TextContainer, Title } from "../style/Common.style";
 
 export type TheaderScreenProps = {
-    title: string;
-    link: string;
+  title: string;
+  info: string;
+  link: string;
     icon: string;
   };
   
@@ -18,6 +19,7 @@ export function HeaderScreen(headerParam: TheaderScreenProps) {
           </IconContainer>
           <TextContainer>
             <h1>{headerParam.title}</h1>
+            <h2>{headerParam.info}</h2>
           </TextContainer>
         </ScreenHeader>
       </>

@@ -7,13 +7,126 @@
 import { action, map } from "nanostores";
 import { TLang } from "../types/App.type";
 import { updateVarietyList } from "./NewSeed.store";
-import { setVariety } from "./NewVariety.store";
+import { firstCap } from "../lib/utils";
+import { useStore } from "@nanostores/react";
+import { SeedStore,saveSeed } from "./Seed.store";
 
 export const MIN_TEMP: number = -300;
 export const ID_INIT: number = -1;
+export const ID_SEED_INIT: number = -2;
+
+export enum TfieldString {
+  species = "species",
+  gender = "gender",
+  cultivar = "cultivar",
+  seedName = "seedName",
+  varietyName = "namvarietyNamee",
+  remarks = "remarks",
+  idFirebase = "idFirebase",
+}
+
+export enum TfieldNumber {
+  idVariety = "idVariety",
+  category = "category",
+  rusticity = "rusticity",
+  minGermTemp = "minGermTemp",
+  maxGermTemp = "maxGermTemp",
+  minGermTime = "minGermTime",
+  maxGermTime = "maxGermTime",
+  zeroVeg = "zeroVeg",
+  minGrowTemp = "minGrowTemp",
+  maxGrowTemp = "maxGrowTemp",
+  minGrowTime = "minGrowTime",
+  maxGrowTime = "maxGrowTime",
+  minYield = "minYield",
+  maxYield = "maxYield",
+  calorie = "calorie",
+  protein = "protein",
+  lipid = "lipid",
+  carbohydrate = "carbohydrate",
+  tGW = "tGW",
+  sowingDepth = "sowingDepth",
+  seedSpacing = "seedSpacing",
+  rowSpacing = "rowSpacing",
+  height = "height",
+  floorSpace = "floorSpace",
+}
+
+enum Color {
+  Red,
+  Green,
+}
+
+export type TvarietyInputCorrect = {
+  isCorrectIdVariety: boolean;
+  isCorrectCategory: boolean;
+  isCorrectRusticite: boolean;
+  isCorrectMinGermTemp: boolean;
+  isCorrectMaxGermTemp: boolean;
+  isCorrectMinGermTime: boolean;
+  isCorrectMaxGermTime: boolean;
+  isCorrectZeroVeg: boolean;
+  isCorrectMinGrowTemp: boolean;
+  isCorrectMaxGrowTemp: boolean;
+  isCorrectMinGrowTime: boolean;
+  isCorrectMaxGrowTime: boolean;
+  isCorrectMinYield: boolean;
+  isCorrectMaxYield: boolean;
+  isCorrectCalorie: boolean;
+  isCorrectProtein: boolean;
+  isCorrectLipid: boolean;
+  isCorrectCarbohydrate: boolean;
+  isCorrectTGW: boolean;
+  isCorrectSowingDepth: boolean;
+  isCorrectSeedSpacing: boolean;
+  isCorrectRowSpacing: boolean;
+  isCorrectHeight: boolean;
+  isCorrectFloorSpace: boolean;
+  isCorrectSpecie: boolean;
+  isCorrectVariety: boolean;
+  isCorrectCultivar: boolean;
+  isCorrectSeedName: boolean;
+  isCorrectVarietyName: boolean;
+  isCorrectRemarks: boolean;
+  isCorrectIdFirebase: boolean;
+};
+
+const inputInit: TvarietyInputCorrect = {
+  isCorrectIdVariety: false,
+  isCorrectCategory: false,
+  isCorrectRusticite: false,
+  isCorrectMinGermTemp: false,
+  isCorrectMaxGermTemp: false,
+  isCorrectMinGermTime: false,
+  isCorrectMaxGermTime: false,
+  isCorrectZeroVeg: false,
+  isCorrectMinGrowTemp: false,
+  isCorrectMaxGrowTemp: false,
+  isCorrectMinGrowTime: false,
+  isCorrectMaxGrowTime: false,
+  isCorrectMinYield: false,
+  isCorrectMaxYield: false,
+  isCorrectCalorie: false,
+  isCorrectProtein: false,
+  isCorrectLipid: false,
+  isCorrectCarbohydrate: false,
+  isCorrectTGW: false,
+  isCorrectSowingDepth: false,
+  isCorrectSeedSpacing: false,
+  isCorrectRowSpacing: false,
+  isCorrectHeight: false,
+  isCorrectFloorSpace: false,
+  isCorrectSpecie: false,
+  isCorrectVariety: false,
+  isCorrectCultivar: false,
+  isCorrectSeedName: false,
+  isCorrectVarietyName: false,
+  isCorrectRemarks: false,
+  isCorrectIdFirebase: false,
+};
 
 export type Tvariety = {
-  idFirebase: string; // Id dans la table
+  
   idVariety: number;
   seedType: number;
   category: number; //
@@ -40,24 +153,25 @@ export type Tvariety = {
   height: number; // in mm
   floorSpace: number; // square m
   gender: string; // latin name
-  specie: string; // latin name
+  species: string; // latin name
   variety: string; // latin name
   cultivar: string; // local name
-  name: string; //  common name
+  seedName: "", //  seed common name
+  varietyName: "", //  variety common name
   remarks: string; // free text
 };
 
 export const varietyInit: Tvariety = {
-  idFirebase: "", // Id dans la table
+  
   idVariety: ID_INIT,
   seedType: 0,
   category: MIN_TEMP, //
   rusticity: MIN_TEMP, // temps en °c
+  zeroVeg: MIN_TEMP, // temp en °c
   minGermTemp: MIN_TEMP, // temps en °c
   maxGermTemp: MIN_TEMP, // temps en °c
   minGermTime: MIN_TEMP, // nb jour
   maxGermTime: MIN_TEMP, // nb jour
-  zeroVeg: MIN_TEMP, // temp en °c
   minGrowTemp: MIN_TEMP, // temp en °c
   maxGrowTemp: MIN_TEMP, // temp en °c
   minGrowTime: MIN_TEMP, // temp en °c
@@ -75,10 +189,11 @@ export const varietyInit: Tvariety = {
   height: MIN_TEMP, // in mm
   floorSpace: MIN_TEMP, // square m
   gender: "", // latin name
-  specie: "", // latin name
-  variety: "", // latin name
+  species: "", // latin name
+  variety: "", // common name
   cultivar: "", // local name
-  name: "", //  common name
+  seedName: "", //  seed common name
+  varietyName: "", //  variety common name
   remarks: "", // free text
 };
 
@@ -86,6 +201,7 @@ export type VarietyStore = {
   name: string;
   isBusy: boolean;
   currentId: number;
+  inputCorrect: TvarietyInputCorrect;
   currentVariety: Tvariety;
   idSeed: string;
   varietyList: Tvariety[];
@@ -96,46 +212,46 @@ export const varietyStore = map<VarietyStore>({
   idSeed: "",
   isBusy: false,
   currentId: ID_INIT,
+  inputCorrect: { ...inputInit },
   currentVariety: { ...varietyInit },
   varietyList: [],
 });
 
-// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-export const addNewVariety = action(
-  varietyStore,
-  "addNewVariety",
-  (store) => {
-    console.log("addNewVariety");
-    store.setKey("currentVariety", varietyInit);
-    store.setKey("currentId", ID_INIT);
-    // save();
-  }
-);
-// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-export const addVariety = action(
-  varietyStore,
-  "addVariety",
-  (store, newVariety: Tvariety) => {
-    const { varietyList } = store.get();
-    if (newVariety.idVariety ===ID_INIT){
-      newVariety.idVariety = varietyList.length;
-      const newVarietyList = [newVariety, ...varietyList];
-      store.setKey("varietyList", newVarietyList);
-    } else{
 
-      const newVarietyList  = varietyList.map((item : Tvariety, index : number)=>{
-        if( item.idVariety ===newVariety.idVariety)
-          return newVariety;
-        else
-          return item;
-      })
-      store.setKey("varietyList", newVarietyList);
 
-    }
-    store.setKey("currentVariety", newVariety);
-    // save();
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const saveVariety = action(varietyStore, "addVariety", (store) => {
+  const { currentSeed } = useStore(SeedStore);
+
+  console.log("saveVariety");
+  const { varietyList, currentVariety } = store.get();
+  if (currentVariety.idVariety === ID_INIT) {
+    currentVariety.idVariety = varietyList.length;
+    const newVarietyList = [currentVariety, ...varietyList];
+    store.setKey("varietyList", newVarietyList);
+    store.setKey("currentVariety", currentVariety); // in order to have idVariety included
+  } else {
+    const newVarietyList = varietyList.map((item: Tvariety, index: number) => {
+      if (item.idVariety === currentVariety.idVariety) return currentVariety;
+      else return item;
+    });
+    store.setKey("varietyList", newVarietyList);
   }
-);
+
+
+  if (currentSeed.idFirebase===""){
+    saveSeed ();
+  }
+
+  // save();
+});
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const newVariety= action(varietyStore, "newVariety", (store) => {
+
+  store.setKey("currentVariety", varietyInit);
+  store.setKey("currentId", ID_INIT);
+
+});
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const save = action(varietyStore, "save", (store) => {
   const { varietyList, idSeed } = store.get();
@@ -150,7 +266,6 @@ export const setIdCurrentVariety = action(
     const { varietyList } = store.get();
     const currentVariety = varietyList[id];
     store.setKey("currentVariety", currentVariety);
-    setVariety(currentVariety);
   }
 );
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -191,3 +306,41 @@ export const setIsBusy = action(
   }
 );
 // --------------------------------------------------------
+export const setInput = action(
+  varietyStore,
+  "setInput",
+  (store, fieldName: string, value: string) => {
+    const { currentVariety } = store.get();
+    const newInput = { ...currentVariety, [fieldName]: value };
+    const checkField = "isCorrect" + firstCap(fieldName);
+
+    store.setKey("currentVariety", newInput);
+    setIsInputCorrect(checkField, value);
+  }
+);
+// --------------------------------------------------------
+export const setIsInputCorrect = action(
+  varietyStore,
+  "setIsInputCorrect",
+  (store, field: string, value: string) => {
+    const { inputCorrect } = store.get();
+    if (value !== "") {
+      const newInputCorrect = { ...inputCorrect, [field]: true };
+
+      store.setKey("inputCorrect", newInputCorrect);
+    }
+  }
+);
+// --------------------------------------------------------
+export const setInputNumber = action(
+  varietyStore,
+  "setInputNumber",
+  (store, fieldName: TfieldNumber, value: string) => {
+    const { currentVariety } = store.get();
+    const newInput = { ...currentVariety, [fieldName]: parseInt(value) };
+    const checkField = "isCorrect" + firstCap(TfieldNumber[fieldName]);
+
+    store.setKey("currentVariety", newInput);
+    setIsInputCorrect(checkField, value);
+  }
+);

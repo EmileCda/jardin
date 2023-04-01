@@ -10,7 +10,14 @@ export const SeedMainContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
 
+export const AddSeed = styled.div<{ idFirebase: string }>`
+  display: idFirebase=== ;
+  display: ${(props) => (props.idFirebase==="" ? "flex" : "none")};
+  input{
+    width: 6rem;
+  }
 `;
 
 export const Seed = styled.div`
@@ -22,9 +29,6 @@ export const Seed = styled.div`
   background-color: ${AppTheme.colors.medium};
 `;
 
-
 export const SeedId = styled.p`
-display : none;
-
+  display: none;
 `;
-

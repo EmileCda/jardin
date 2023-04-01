@@ -6,15 +6,16 @@ import { useStore } from "@nanostores/react";
 import { Link } from "react-router-dom";
 import { textScreen } from "../lib/utils";
 import {
-  newVarietyStore,
-  setInputNumber,
+  ID_INIT,
+  MIN_TEMP,
   TfieldNumber,
-  setSeedType,
-  setInput,
   TfieldString,
-  saveNewVarity,
-} from "../store/NewVariety.store";
-import { MIN_TEMP } from "../store/Variety.store";
+  saveVariety,
+  setInput,
+  setInputNumber,
+  setSeedType,
+  varietyStore,
+} from "../store/Variety.store";
 import {
   InputGroup2Container,
   InputGroup2Label,
@@ -22,8 +23,10 @@ import {
   NewVarietyContainer,
   InputGroup,
 } from "../style/NewVariety.style";
-import { HeaderScreen } from "./Commun";
 import jsonData from "./../data/localData.json";
+import { HeaderScreen } from "./Common";
+import { SeedStore, Tseed } from "../store/Seed.store";
+import { AddSeed } from "../style/Seeds.style";
 export const localData: any = jsonData;
 
 export type Tinput = {
@@ -116,6 +119,12 @@ export function SeedType() {
   );
 }
 
+export function ComposeName(seed: Tseed) {
+  return seed.idFirebase === ""
+    ? ""
+    : seed.varietyList[0].gender + " " + seed.varietyList[0].species;
+}
+
 export default function NewVariety() {
   const inputGroupList = [
     {
@@ -151,7 +160,9 @@ export default function NewVariety() {
   ];
 
   const myTextScreen = textScreen("NewVariety");
-  const { variety } = useStore(newVarietyStore);
+  // const { variety,idVariety } = useStore(newVarietyStore);
+  const { currentVariety, currentId } = useStore(varietyStore);
+  const { currentSeed } = useStore(SeedStore);
   const seedTypeList = localData.seedType;
   return (
     <>
@@ -160,15 +171,40 @@ export default function NewVariety() {
           link="/Variety"
           icon="fa-solid fa-chevron-left"
           title={myTextScreen.screenName}
+          info={ComposeName(currentSeed)}
         />
+
+        <AddSeed idFirebase={currentSeed.idFirebase}>
+          <input
+            type="Text"
+            onChange={(e) => setInput("seedName", e.currentTarget.value)}
+            value={currentVariety.seedName}
+            placeholder={myTextScreen.seedName}
+          />
+          <input
+            type="Text"
+            onChange={(e) => setInput("gender", e.currentTarget.value)}
+            value={currentVariety.gender}
+            placeholder={myTextScreen.gender}
+          />
+          <input
+            type="Text"
+            onChange={(e) => setInput("species", e.currentTarget.value)}
+            value={currentVariety.species}
+            placeholder={myTextScreen.species}
+          />
+        </AddSeed>
 
         <input
           type="Text"
-          onChange={(e) => setInput("name", e.currentTarget.value)}
-          value={variety.name}
-          placeholder={TfieldString.name}
+          onChange={(e) => setInput("varietyName", e.currentTarget.value)}
+          value={
+            currentSeed.idFirebase === ""
+              ? myTextScreen.Generic
+              : currentVariety.varietyName
+          }
+          placeholder={myTextScreen.varietyName}
         />
-
         <ul>
           {inputGroupList.map((item, index: number) => (
             <li key={index}>
@@ -177,26 +213,31 @@ export default function NewVariety() {
                 input1={{
                   name: item.name1,
                   label: myTextScreen[item.name1],
-                  // value: variety[item[1]],
-                  value: variety[item.name1],
+                  // value: currentVariety[item[1]],
+                  value: currentVariety[item.name1],
                 }}
                 input2={{
                   name: item.name2,
                   label: myTextScreen[item.name2],
-                  // value: variety[item[1]],
-                  value: variety[item.name2],
+                  // value: currentVariety[item[1]],
+                  value: currentVariety[item.name2],
                 }}
               />
             </li>
           ))}
           <li key={1000}>
-            Colorie / gramme
+            {myTextScreen.calorieGramme}
+
             <input
               type="number"
               onChange={(e) =>
                 setInputNumber(TfieldNumber.calorie, e.currentTarget.value)
               }
-              value={variety.calorie}
+              value={
+                currentVariety.calorie === MIN_TEMP
+                  ? ""
+                  : currentVariety.calorie
+              }
               placeholder={TfieldNumber.calorie}
             />
           </li>
@@ -206,17 +247,17 @@ export default function NewVariety() {
               input1={{
                 name: TfieldNumber.protein,
                 label: TfieldNumber.protein,
-                value: variety.protein,
+                value: currentVariety.protein,
               }}
               input2={{
                 name: TfieldNumber.lipid,
                 label: TfieldNumber.lipid,
-                value: variety.lipid,
+                value: currentVariety.lipid,
               }}
               input3={{
                 name: TfieldNumber.carbohydrate,
                 label: TfieldNumber.carbohydrate,
-                value: variety.carbohydrate,
+                value: currentVariety.carbohydrate,
               }}
             />
           </li>
@@ -226,17 +267,17 @@ export default function NewVariety() {
               input1={{
                 name: TfieldNumber.tGW,
                 label: TfieldNumber.tGW,
-                value: variety.tGW,
+                value: currentVariety.tGW,
               }}
               input2={{
                 name: TfieldNumber.seedSpacing,
                 label: TfieldNumber.seedSpacing,
-                value: variety.seedSpacing,
+                value: currentVariety.seedSpacing,
               }}
               input3={{
                 name: TfieldNumber.rowSpacing,
                 label: TfieldNumber.rowSpacing,
-                value: variety.rowSpacing,
+                value: currentVariety.rowSpacing,
               }}
             />
           </li>
@@ -246,12 +287,12 @@ export default function NewVariety() {
               input1={{
                 name: TfieldNumber.height,
                 label: TfieldNumber.height,
-                value: variety.height,
+                value: currentVariety.height,
               }}
               input2={{
                 name: TfieldNumber.floorSpace,
                 label: TfieldNumber.floorSpace,
-                value: variety.floorSpace,
+                value: currentVariety.floorSpace,
               }}
             />
           </li>
@@ -260,7 +301,12 @@ export default function NewVariety() {
           </li>
         </ul>
         <Link to="/Variety">
-          <button onClick={saveNewVarity}>{myTextScreen.saveVariety}</button>
+          <button onClick={saveVariety}>
+            {`[${currentId}]   `}
+            {currentId === ID_INIT
+              ? myTextScreen.saveVariety
+              : myTextScreen.updateVariety}
+          </button>
         </Link>
       </NewVarietyContainer>
     </>
