@@ -5,16 +5,15 @@
 import { useStore } from "@nanostores/react";
 import { Link } from "react-router-dom";
 import { textScreen } from "../lib/utils";
-import { newSeedStore, Tseed } from "../store/NewSeed.store";
 import { SeedStore } from "../store/Seed.store";
 import {
+  loadVarietyList,
   newVariety,
   setIdCurrentVariety,
   Tvariety,
   varietyStore,
 } from "../store/Variety.store";
 import { MyLink, Title } from "../style/Common.style";
-import { SeedId } from "../style/Seeds.style";
 import { VarietyContainer, VarietyItem, VarietyMainContainer } from "../style/Variety.style";
 import { HeaderScreen } from "./Common";
 
@@ -29,6 +28,7 @@ export function DisplayVariety({ item, key }: DisplayVarietyProps) {
     <>
       <MyLink to="/NewVariety">
         <VarietyItem key={key} onClick={() => setIdCurrentVariety(item.idVariety)}>
+          
           <Title>{item.varietyName}</Title>
         </VarietyItem>
       </MyLink>
@@ -39,11 +39,14 @@ export function DisplayVariety({ item, key }: DisplayVarietyProps) {
 export default function Variety() {
   const myTextScreen = textScreen("Variety");
   const { currentSeed } = useStore(SeedStore);
-  const {  varietyList } = useStore(varietyStore);
+  const {  isLoaded } = useStore(varietyStore);
   
+  if (!isLoaded){
+    loadVarietyList(currentSeed);
 
-  // -----------------------------------------------------------------------
-
+  }
+    // -----------------------------------------------------------------------
+  const {  varietyList } = useStore(varietyStore);
   return (
     <>
     <VarietyContainer>
@@ -51,7 +54,7 @@ export default function Variety() {
           link="/Seeds"
           icon="fa-solid fa-chevron-left"
           title={myTextScreen.screenName}
-          info={`${"tomate : Genre-espèce"}`}
+          info={`${currentSeed.seedName} : ${currentSeed.gender}-${currentSeed.species}`}
         />
       
       <VarietyMainContainer>

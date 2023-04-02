@@ -6,10 +6,8 @@
 
 import { action, map } from "nanostores";
 import { TLang } from "../types/App.type";
-import { updateVarietyList } from "./NewSeed.store";
 import { firstCap } from "../lib/utils";
-import { useStore } from "@nanostores/react";
-import { SeedStore,saveSeed } from "./Seed.store";
+import { ModifySeed, Tseed, UpdateSeed, saveSeed } from "./Seed.store";
 
 export const MIN_TEMP: number = -300;
 export const ID_INIT: number = -1;
@@ -20,7 +18,7 @@ export enum TfieldString {
   gender = "gender",
   cultivar = "cultivar",
   seedName = "seedName",
-  varietyName = "namvarietyNamee",
+  varietyName = "varietyName",
   remarks = "remarks",
   idFirebase = "idFirebase",
 }
@@ -126,8 +124,13 @@ const inputInit: TvarietyInputCorrect = {
 };
 
 export type Tvariety = {
-  
+  idFirebase: string;
   idVariety: number;
+  seedName: string; //  seed common name
+  gender: string; // latin name
+  species: string; // latin name
+  cultivar: string; // local name
+  varietyName: string; //  variety common name
   seedType: number;
   category: number; //
   rusticity: number; // temps en °c
@@ -152,18 +155,17 @@ export type Tvariety = {
   rowSpacing: number; // in mm
   height: number; // in mm
   floorSpace: number; // square m
-  gender: string; // latin name
-  species: string; // latin name
-  variety: string; // latin name
-  cultivar: string; // local name
-  seedName: "", //  seed common name
-  varietyName: "", //  variety common name
   remarks: string; // free text
 };
 
 export const varietyInit: Tvariety = {
-  
+  idFirebase: "",
   idVariety: ID_INIT,
+  seedName: "", //  seed common name
+  gender: "", // latin name
+  species: "", // latin name
+  varietyName: "", //  variety common name
+  cultivar: "", // local name
   seedType: 0,
   category: MIN_TEMP, //
   rusticity: MIN_TEMP, // temps en °c
@@ -188,17 +190,13 @@ export const varietyInit: Tvariety = {
   rowSpacing: MIN_TEMP, // in mm
   height: MIN_TEMP, // in mm
   floorSpace: MIN_TEMP, // square m
-  gender: "", // latin name
-  species: "", // latin name
-  variety: "", // common name
-  cultivar: "", // local name
-  seedName: "", //  seed common name
-  varietyName: "", //  variety common name
   remarks: "", // free text
 };
 
 export type VarietyStore = {
   name: string;
+  idFirebase: string;
+  isLoaded: boolean;
   isBusy: boolean;
   currentId: number;
   inputCorrect: TvarietyInputCorrect;
@@ -208,6 +206,8 @@ export type VarietyStore = {
 };
 
 export const varietyStore = map<VarietyStore>({
+  isLoaded: false,
+  idFirebase: "",
   name: "",
   idSeed: "",
   isBusy: false,
@@ -217,55 +217,117 @@ export const varietyStore = map<VarietyStore>({
   varietyList: [],
 });
 
-
-
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-export const saveVariety = action(varietyStore, "addVariety", (store) => {
-  const { currentSeed } = useStore(SeedStore);
+export const varietyNewSeed = action(
+  varietyStore,
+  "varietyNewSeed",
+  (store, newSeed: Tseed) => {
+    // 1. créer une variété générique avec idVariety= varietyList.lenght (O)
+    // 1. ajouter l'id firebase dans la varieté
+    const newVariety = {
+      ...varietyInit,
+      idFirebase: newSeed.idFirebase,
+      idVariety: newSeed.varietyList.length,
+      varietyName: "Generic",
+    };
+    store.setKey("currentVariety", newVariety); // in order to have idVariety included
+    const { currentVariety, varietyList } = store.get();
+    // 1. ajouter currentVariety à VarietyList ;
 
-  console.log("saveVariety");
-  const { varietyList, currentVariety } = store.get();
-  if (currentVariety.idVariety === ID_INIT) {
-    currentVariety.idVariety = varietyList.length;
     const newVarietyList = [currentVariety, ...varietyList];
-    store.setKey("varietyList", newVarietyList);
-    store.setKey("currentVariety", currentVariety); // in order to have idVariety included
-  } else {
-    const newVarietyList = varietyList.map((item: Tvariety, index: number) => {
-      if (item.idVariety === currentVariety.idVariety) return currentVariety;
-      else return item;
-    });
-    store.setKey("varietyList", newVarietyList);
+    store.setKey("varietyList", newVarietyList); // in order to have idVariety included
   }
+);
+
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const saveVariety = action(varietyStore, "save", (store) => {
+  const { currentVariety, varietyList } = store.get();
+  const newVarietyList = varietyList.map((variety) => {
+    if (variety.idVariety === currentVariety.idVariety) {
+      return currentVariety;
+    } else {
+      return variety;
+    }
+  });
+  store.setKey("varietyList", newVarietyList); // in order to have idVariety included
+  console.log(newVarietyList)
+  console.log(varietyList);
+  console.log(currentVariety);
+  saveSeed(newVarietyList);
+});
 
 
-  if (currentSeed.idFirebase===""){
-    saveSeed ();
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const setVarietyIsLoaded = action(
+  varietyStore,
+  "setVarietyIsLoaded",
+  (store, load: boolean) => {
+    store.setKey("isLoaded", load);
   }
-
-  // save();
+); // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const setIsLoaded = action(
+  varietyStore,
+  "setIsLoaded",
+  (store, load: boolean) => {
+    store.setKey("isLoaded", load);
+  }
+);
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const loadVarietyList = action(
+  varietyStore,
+  "loadVarietyList",
+  (store, seed: Tseed) => {
+    const newVarietyList = seed.varietyList;
+    store.setKey("varietyList", newVarietyList);
+    store.setKey("idFirebase", seed.idFirebase);
+    setIsLoaded(true);
+  }
+);
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const setIdFireBase = action(
+  varietyStore,
+  "setIdFireBase",
+  (store, id: string) => {
+    store.setKey("idFirebase", id);
+  }
+);
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const newVariety = action(varietyStore, "newVariety", (store) => {
+  const { varietyList } = store.get();
+  const newVariete = {
+    ...varietyList[0],
+    varietyName: "",
+    idVariety: varietyList.length,
+  };
+  console.log(varietyList);
+  console.log(newVariete);
+  store.setKey("currentVariety", newVariete);
+  store.setKey("currentId", newVariete.idVariety);
+  const newVarietyList = [newVariete, ...varietyList];
+  store.setKey("varietyList", newVarietyList);
 });
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-export const newVariety= action(varietyStore, "newVariety", (store) => {
+export const setVarietyName = action(
+  varietyStore,
+  "newVariety",
+  (store, varietyName: string) => {
+    const { currentVariety } = store.get();
+    const newCurentVariety = { ...currentVariety, varietyName: varietyName };
+    store.setKey("currentVariety", newCurentVariety);
+  }
+);
 
-  store.setKey("currentVariety", varietyInit);
-  store.setKey("currentId", ID_INIT);
-
-});
-// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-export const save = action(varietyStore, "save", (store) => {
-  const { varietyList, idSeed } = store.get();
-  updateVarietyList(idSeed, varietyList);
-});
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const setIdCurrentVariety = action(
   varietyStore,
   "setIdCurrentVariety",
   (store, id: number) => {
+
     store.setKey("currentId", id);
     const { varietyList } = store.get();
-    const currentVariety = varietyList[id];
-    store.setKey("currentVariety", currentVariety);
+    const currentVariety = varietyList.filter((variety)=> variety.idVariety===id)
+    store.setKey("currentVariety", currentVariety[0]);
+    console.log(varietyList);
   }
 );
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -276,8 +338,10 @@ export const setSeedType = action(
     const { currentVariety } = store.get();
     const modId = isSet ? id : -id;
     const newSSeedType = currentVariety.seedType + modId;
+    
     const newCurrentVariety = { ...currentVariety, seedType: newSSeedType };
     store.setKey("currentVariety", newCurrentVariety);
+    console.log(newCurrentVariety);
   }
 );
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+

@@ -33,3 +33,21 @@ export function textScreen(screeNName: string) {
 export function firstCap(myString: string) {
   return myString.charAt(0).toUpperCase() + myString.slice(1);
 }
+
+
+
+export function bitValue(value :number, length : number){
+  
+  const bitString = (value >>> 0).toString(2);
+  let arrayInt : number[] = Array(length).fill(0);
+
+  let index : number= 0;
+  for (const letter  of bitString){
+
+    arrayInt[bitString.length-index-1]= parseInt(letter) 
+    index++ ;
+  }
+
+  return arrayInt; 
+
+}

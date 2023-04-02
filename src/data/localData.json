@@ -279,10 +279,8 @@
       "en": "Update",
       "es": "Actualizar"
     },
-
-    
     {
-      "key": "nameLabel",
+      "key": "varietyName",
       "fr": "Nom de la variété",
       "en": "Variety Name",
       "es": "Nombre del variedad "

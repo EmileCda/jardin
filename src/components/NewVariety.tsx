@@ -4,16 +4,16 @@
 
 import { useStore } from "@nanostores/react";
 import { Link } from "react-router-dom";
-import { textScreen } from "../lib/utils";
+import { bitValue, textScreen } from "../lib/utils";
 import {
   ID_INIT,
   MIN_TEMP,
   TfieldNumber,
-  TfieldString,
   saveVariety,
   setInput,
   setInputNumber,
   setSeedType,
+  setVarietyName,
   varietyStore,
 } from "../store/Variety.store";
 import {
@@ -24,7 +24,7 @@ import {
   InputGroup,
 } from "../style/NewVariety.style";
 import jsonData from "./../data/localData.json";
-import { HeaderScreen } from "./Common";
+import { ComposeName, HeaderScreen } from "./Common";
 import { SeedStore, Tseed } from "../store/Seed.store";
 import { AddSeed } from "../style/Seeds.style";
 export const localData: any = jsonData;
@@ -91,10 +91,16 @@ export function InputGroup3(inputGroup: TinputGroup3Props) {
   );
 }
 
-export function SeedType() {
+export type SeedTypeprops={
+  value : number,
+
+}
+
+
+export function SeedType({value} :SeedTypeprops ) {
   const seedTypeList = localData.seedType;
-  // console.log("SeedType");
-  // console.log(seedTypeList);
+  const typeArray : number[] = bitValue(value,seedTypeList.length);
+
   return (
     <>
       <ul>
@@ -106,7 +112,9 @@ export function SeedType() {
                   type="checkbox"
                   id={item.name}
                   name={item.name}
-                  value={item.value}
+                  value={typeArray[index]}
+                  checked ={typeArray[index]===0 ? false : true} 
+                  // value={item.value}
                   onChange={(e) => setSeedType(e.target.checked, item.value)}
                 />
                 {item.name}
@@ -117,12 +125,6 @@ export function SeedType() {
       </ul>
     </>
   );
-}
-
-export function ComposeName(seed: Tseed) {
-  return seed.idFirebase === ""
-    ? ""
-    : seed.varietyList[0].gender + " " + seed.varietyList[0].species;
 }
 
 export default function NewVariety() {
@@ -160,8 +162,7 @@ export default function NewVariety() {
   ];
 
   const myTextScreen = textScreen("NewVariety");
-  // const { variety,idVariety } = useStore(newVarietyStore);
-  const { currentVariety, currentId } = useStore(varietyStore);
+  const { currentVariety, currentId, idFirebase } = useStore(varietyStore);
   const { currentSeed } = useStore(SeedStore);
   const seedTypeList = localData.seedType;
   return (
@@ -198,11 +199,7 @@ export default function NewVariety() {
         <input
           type="Text"
           onChange={(e) => setInput("varietyName", e.currentTarget.value)}
-          value={
-            currentSeed.idFirebase === ""
-              ? myTextScreen.Generic
-              : currentVariety.varietyName
-          }
+          value={currentVariety.varietyName}
           placeholder={myTextScreen.varietyName}
         />
         <ul>
@@ -297,7 +294,7 @@ export default function NewVariety() {
             />
           </li>
           <li key={5000}>
-            <SeedType />
+            <SeedType value={currentVariety.seedType} />
           </li>
         </ul>
         <Link to="/Variety">

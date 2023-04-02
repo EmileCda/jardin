@@ -50,7 +50,7 @@ export const TextContainer = styled.div`
     margin : 0 ;
   }
   h2{
-    font-size : 1.2rem;
+    font-size : 1rem;
     padding : 0; 
     margin : 0 ;
   }

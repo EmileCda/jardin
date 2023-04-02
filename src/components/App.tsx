@@ -7,7 +7,6 @@ import Calendar from "./Calendar";
 import Header from "./Header";
 import Home from "./Home";
 import Needs from "./Needs";
-import NewSeed from "./NewSeed";
 import NewVariety from "./NewVariety";
 import Seeds from "./Seeds";
 import Test from "./Test";
@@ -44,7 +43,6 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Needs" element={<Needs />} />
           <Route path="/Seeds" element={<Seeds />} />
-          <Route path="/NewSeed" element={<NewSeed />} />
           <Route path="/Calendar" element={<Calendar />} />
           <Route path="/About" element={<About />} />
           <Route path="/NewVariety" element={<NewVariety />} />

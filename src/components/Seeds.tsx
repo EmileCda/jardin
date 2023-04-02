@@ -1,26 +1,36 @@
 import { useStore } from "@nanostores/react";
 import { Link } from "react-router-dom";
 import { textScreen } from "../lib/utils";
-import { loadSeedList, newSeedStore, Tseed } from "../store/NewSeed.store";
-import { newSeed, setIdCurrentSeed, } from "../store/Seed.store";
+import {
+  SeedStore,
+  Tseed,
+  deleteSeed,
+  loadSeedList,
+  newSeed,
+  setIdCurrentSeed,
+} from "../store/Seed.store";
 import { MyLink, Title } from "../style/Common.style";
-import {  Seed, SeedId, SeedMainContainer } from "../style/Seeds.style";
+import { Delete, Seed, SeedId, SeedMainContainer } from "../style/Seeds.style";
 
 export type DisplaySeedProps = {
   item: Tseed;
-  index: number;
+  key: number;
 };
 
 // -----------------------------------------------------------------------
-export function DisplaySeed( {item, index} : DisplaySeedProps) {
+export function DisplaySeed({ item, key }: DisplaySeedProps) {
   return (
     <>
-    <MyLink to="/Variety">
-      <Seed key={index} onClick={() => setIdCurrentSeed(item.idFirebase)}>
-        <Title>{item.name}</Title>
-        <SeedId>{item.idFirebase}</SeedId>
-      </Seed>
-      </MyLink>
+        <Seed key={key} onClick={() => setIdCurrentSeed(item.idFirebase)}>
+        <MyLink to="/Variety">
+          <h1>{item.seedName}
+          </h1>
+          <SeedId>{item.idFirebase}</SeedId>
+          </MyLink>
+          <Delete onClick={(e)=>deleteSeed(item)}>
+              <i className="fa-solid fa-trash-can"></i>
+          </Delete>
+        </Seed>
     </>
   );
 }
@@ -30,7 +40,7 @@ export function DisplaySeed( {item, index} : DisplaySeedProps) {
  */
 export default function Seeds() {
   const myTextScreen = textScreen("Seeds");
-  const { input, seedList, isLoaded } = useStore(newSeedStore);
+  const { seedList, isLoaded } = useStore(SeedStore);
 
   if (!isLoaded) {
     loadSeedList();
@@ -41,7 +51,7 @@ export default function Seeds() {
       <h1>{myTextScreen.screenName}</h1>
       <SeedMainContainer>
         {seedList.map((item: Tseed, index: number) => (
-          <DisplaySeed item={item} index={index} />
+          <DisplaySeed item={item} key={index} />
         ))}
       </SeedMainContainer>
 

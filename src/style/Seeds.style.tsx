@@ -13,22 +13,36 @@ export const SeedMainContainer = styled.div`
 `;
 
 export const AddSeed = styled.div<{ idFirebase: string }>`
-  display: idFirebase=== ;
-  display: ${(props) => (props.idFirebase==="" ? "flex" : "none")};
-  input{
+  display: idFirebase===;
+  display: ${(props) => (props.idFirebase === "" ? "none" : "flex")};
+  input {
     width: 6rem;
   }
 `;
 
 export const Seed = styled.div`
   font-size: 1rem;
-  padding: 0 0.5rem;
   margin: 0.2rem;
+  padding: 0;
   border: 1px dashed yellow;
-  max-width: 99vw;
+  min-width: 99vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: ${AppTheme.colors.medium};
+  h1 {
+    font-size: 1.5rem;
+    padding: 0 0.6rem;
+  }
 `;
 
 export const SeedId = styled.p`
   display: none;
+`;
+
+export const Delete = styled.div`
+  cursor: pointer;
+  i {
+    font-size: 2rem;
+  }
 `;
