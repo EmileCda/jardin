@@ -7,7 +7,7 @@ import { AppTheme } from "./App.style";
 
 
 
-export const VarietyContainer = styled.div`
+export const VarietyScreen = styled.div`
   position: absolute;
   left: 0rem;
   top: 0rem;
@@ -33,9 +33,8 @@ export const VarietyItem = styled.div`
   font-size: 1rem;
   padding: 0 0.5rem;
   margin: 0.2rem;
-  border: 1px dashed yellow;
-  max-width: 99vw;
-  background-color: ${AppTheme.colors.medium};
+  max-width: 50vw;
+  color :  ${AppTheme.colors.forground};
 `;
 
 export const VarietyMainContainer = styled.div`
@@ -44,6 +43,28 @@ export const VarietyMainContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+
+
+export const VarietyBlock = styled.div`
+  display: flex;
+  min-width: 100vw;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: 1px dashed yellow;
+  background-color: ${AppTheme.colors.medium};
+  MyLink{
+    max-width : 50vw;
+  }
+  i{
+    cursor: pointer;
+    font-size : 2rem
+  }
+
+`;
+
 
 
 

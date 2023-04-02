@@ -37,7 +37,7 @@ export const AppTheme = {
     extra: "Poppins, sans-serif",
     Logo: "Lobster, cursive",
     Logo2: "Bilbo Swash Caps, cursive",
-    fontSize: "18px",
+    fontSize: "24px",
 
   },
   BorderRadius: "0.6rem",
@@ -68,7 +68,7 @@ export const AppGlobalStyle = createGlobalStyle`
     align-items: center;
     min-width: 100vw;
     min-height: 100vh;
-    font-size: 18px;
+    font-size: 24px;
   }
   * {
     box-sizing: border-box;

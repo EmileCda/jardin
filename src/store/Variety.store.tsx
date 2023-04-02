@@ -250,12 +250,30 @@ export const saveVariety = action(varietyStore, "save", (store) => {
     }
   });
   store.setKey("varietyList", newVarietyList); // in order to have idVariety included
-  console.log(newVarietyList)
+  console.log(newVarietyList);
   console.log(varietyList);
   console.log(currentVariety);
   saveSeed(newVarietyList);
 });
 
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+export const deleteVariety = action(
+  varietyStore,
+  "setVarietyIsLoaded",
+  (store, deleteVariety: Tvariety) => {
+    setIsBusy(true);
+    const { varietyList } = store.get();
+    // 1. delete from varietyList
+    const newVarietyList = varietyList.filter(
+      (variety) => variety.idVariety !== deleteVariety.idVariety
+    );
+    store.setKey("varietyList", newVarietyList);
+    // 1. load newVarietyList to Seed
+    // 1. saveSeed ()
+    saveSeed(newVarietyList);
+    setIsBusy(false);
+  }
+);
 
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const setVarietyIsLoaded = action(
@@ -264,7 +282,8 @@ export const setVarietyIsLoaded = action(
   (store, load: boolean) => {
     store.setKey("isLoaded", load);
   }
-); // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+);
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const setIsLoaded = action(
   varietyStore,
   "setIsLoaded",
@@ -294,10 +313,17 @@ export const setIdFireBase = action(
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 export const newVariety = action(varietyStore, "newVariety", (store) => {
   const { varietyList } = store.get();
+
+  let maxIdVariety : number =   ID_INIT;
+for (const variety  of varietyList ){
+  if (maxIdVariety < variety.idVariety)
+    maxIdVariety =  variety.idVariety
+}
+
   const newVariete = {
     ...varietyList[0],
     varietyName: "",
-    idVariety: varietyList.length,
+    idVariety: maxIdVariety++,
   };
   console.log(varietyList);
   console.log(newVariete);
@@ -322,10 +348,11 @@ export const setIdCurrentVariety = action(
   varietyStore,
   "setIdCurrentVariety",
   (store, id: number) => {
-
     store.setKey("currentId", id);
     const { varietyList } = store.get();
-    const currentVariety = varietyList.filter((variety)=> variety.idVariety===id)
+    const currentVariety = varietyList.filter(
+      (variety) => variety.idVariety === id
+    );
     store.setKey("currentVariety", currentVariety[0]);
     console.log(varietyList);
   }
@@ -338,7 +365,7 @@ export const setSeedType = action(
     const { currentVariety } = store.get();
     const modId = isSet ? id : -id;
     const newSSeedType = currentVariety.seedType + modId;
-    
+
     const newCurrentVariety = { ...currentVariety, seedType: newSSeedType };
     store.setKey("currentVariety", newCurrentVariety);
     console.log(newCurrentVariety);

@@ -12,9 +12,9 @@ export const SeedMainContainer = styled.div`
   align-items: center;
 `;
 
-export const AddSeed = styled.div<{ idFirebase: string }>`
-  display: idFirebase===;
-  display: ${(props) => (props.idFirebase === "" ? "none" : "flex")};
+export const AddSeed = styled.div<{ isGeneric: boolean }>`
+
+  display: ${(props) => (props.isGeneric ?  "flex" :"none")};
   input {
     width: 6rem;
   }
@@ -33,6 +33,7 @@ export const Seed = styled.div`
   h1 {
     font-size: 1.5rem;
     padding: 0 0.6rem;
+    color : ${AppTheme.colors.forground};
   }
 `;
 
@@ -44,5 +45,6 @@ export const Delete = styled.div`
   cursor: pointer;
   i {
     font-size: 2rem;
+    color ${AppTheme.colors.forground};
   }
 `;

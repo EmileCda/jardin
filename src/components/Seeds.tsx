@@ -9,7 +9,7 @@ import {
   newSeed,
   setIdCurrentSeed,
 } from "../store/Seed.store";
-import { MyLink, Title } from "../style/Common.style";
+import { MyButton, MyLink, Title } from "../style/Common.style";
 import { Delete, Seed, SeedId, SeedMainContainer } from "../style/Seeds.style";
 
 export type DisplaySeedProps = {
@@ -55,9 +55,9 @@ export default function Seeds() {
         ))}
       </SeedMainContainer>
 
-      <Link to="/NewVariety">
-        <button onClick={newSeed}>{myTextScreen.newSeed}</button>
-      </Link>
+      <MyLink to="/NewVariety">
+        <MyButton onClick={newSeed}>{myTextScreen.newSeed}</MyButton>
+      </MyLink>
     </>
   );
 }

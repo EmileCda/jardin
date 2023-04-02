@@ -22,10 +22,18 @@ export const NewVarietyContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   background-color: ${AppTheme.colors.background};
-  ul{
+  ul {
     list-style: none;
     text-decoration: none;
     padding: 0;
+  }
+  input {
+    width: 10rem;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+  p {
+    font-size: 1.2rem;
   }
 `;
 
@@ -36,51 +44,62 @@ export const VarietyItem = styled.div`
   border: 1px dashed yellow;
   max-width: 99vw;
   background-color: ${AppTheme.colors.medium};
-
 `;
 
-
 export const InputGroup2Container = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-margin: 0 0 .3rem 0;
-padding: .2rem;
-background-color: ${AppTheme.colors.lessBG}; ;
-border-bottom : 1px solid black;
-input{
-  width: 10rem;
-} 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 0.3rem 0;
+  padding: 0.2rem;
+  background-color: ${AppTheme.colors.lessBG};
+  border-bottom: 1px solid black;
+  input {
+    width: 10rem;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
 `;
 
 export const InputGroup2Label = styled.div`
-h1{
-  font-size: 1rem;
-  margin: 0;
-  color:  ${AppTheme.colors.forground}; 
-}
+  h1 {
+    font-size: 1rem;
+    margin: 0;
+    color: ${AppTheme.colors.forground};
+  }
 `;
 
-
-
 export const InputGroup = styled.div`
-display: flex;
-justify-content: center;
-
+  display: flex;
+  justify-content: center;
 `;
 
 export const InputGroup3Container = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-margin: 0 0 .3rem 0;
-padding: .2rem;
-background-color: ${AppTheme.colors.lessBG}; ;
-border-bottom : 1px solid black;
-input{
-  width: 7rem;
-} 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 0.3rem 0;
+  padding: 0.2rem;
+  background-color: ${AppTheme.colors.lessBG};
+  border-bottom: 1px solid black;
+  input {
+    width: 7rem;
+  }
 `;
 
+export const SeedTypeContainer = styled.div`
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  input {
+    width: 10rem;
+    height: 1.5rem;
+    font-size: 1.5rem;
+  }
+  label {
+    font-size: 1.5rem;
+  }
+`;

@@ -13,7 +13,6 @@ import {
   setInput,
   setInputNumber,
   setSeedType,
-  setVarietyName,
   varietyStore,
 } from "../store/Variety.store";
 import {
@@ -22,11 +21,13 @@ import {
   InputGroup3Container,
   NewVarietyContainer,
   InputGroup,
+  SeedTypeContainer,
 } from "../style/NewVariety.style";
 import jsonData from "./../data/localData.json";
 import { ComposeName, HeaderScreen } from "./Common";
 import { SeedStore, Tseed } from "../store/Seed.store";
 import { AddSeed } from "../style/Seeds.style";
+import { MyButton, MyLink } from "../style/Common.style";
 export const localData: any = jsonData;
 
 export type Tinput = {
@@ -103,6 +104,7 @@ export function SeedType({value} :SeedTypeprops ) {
 
   return (
     <>
+    <SeedTypeContainer>
       <ul>
         {seedTypeList.map(
           (item: { name: string; value: number }, index: number) => (
@@ -123,6 +125,7 @@ export function SeedType({value} :SeedTypeprops ) {
           )
         )}
       </ul>
+      </SeedTypeContainer>
     </>
   );
 }
@@ -175,7 +178,7 @@ export default function NewVariety() {
           info={ComposeName(currentSeed)}
         />
 
-        <AddSeed idFirebase={currentSeed.idFirebase}>
+        <AddSeed isGeneric={currentVariety.varietyName==="Generic"}>
           <input
             type="Text"
             onChange={(e) => setInput("seedName", e.currentTarget.value)}
@@ -223,7 +226,7 @@ export default function NewVariety() {
             </li>
           ))}
           <li key={1000}>
-            {myTextScreen.calorieGramme}
+            <p>{myTextScreen.calorieGramme}
 
             <input
               type="number"
@@ -237,6 +240,7 @@ export default function NewVariety() {
               }
               placeholder={TfieldNumber.calorie}
             />
+            </p>
           </li>
           <li key={2000}>
             <InputGroup3
@@ -297,14 +301,14 @@ export default function NewVariety() {
             <SeedType value={currentVariety.seedType} />
           </li>
         </ul>
-        <Link to="/Variety">
-          <button onClick={saveVariety}>
+        <MyLink to="/Variety">
+          <MyButton onClick={saveVariety}>
             {`[${currentId}]   `}
             {currentId === ID_INIT
               ? myTextScreen.saveVariety
               : myTextScreen.updateVariety}
-          </button>
-        </Link>
+          </MyButton>
+        </MyLink>
       </NewVarietyContainer>
     </>
   );
