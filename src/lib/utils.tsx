@@ -20,7 +20,7 @@ export const px2vw = (size: number, width: number = 1440) =>
  * 
  */
 export function textScreen(screeNName: string) {
-  const { lang } = useStore(headerStore);
+  const { lang } = useStore(langStore);
   const textName = "screen" + screeNName;
   const dataScreen = localData[textName];
 

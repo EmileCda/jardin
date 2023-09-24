@@ -8,7 +8,7 @@ import { createGlobalStyle } from "styled-components";
  * color theme from coolor.co
  * for the whole application
  */
-export const DevideMinSize = {
+export const DeviceMinSize = {
   mobile: "480px",
   tablet: "600px",
   tableteLS: "768px",
